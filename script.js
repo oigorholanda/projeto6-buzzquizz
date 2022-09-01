@@ -1,32 +1,32 @@
-function expande(fator){
+function expande1(){
     const a = document.querySelector('.tampa1')
-    a.classList.toggle('none')
+    a.classList.toggle('hidden')
     const b = document.querySelector('.tampa2')
-    b.classList.toggle('none')
+    b.classList.toggle('hidden')
     const c = document.querySelector('.tampa3')
-    c.classList.toggle('none')
+    c.classList.toggle('hidden')
     const d = document.querySelector('.primeirapergunta')
     d.classList.toggle('margin-bottom')
 }
 
 function expande2(){
     const a = document.querySelector('.tampa4')
-    a.classList.toggle('none')
+    a.classList.toggle('hidden')
     const b = document.querySelector('.tampa5')
-    b.classList.toggle('none')
+    b.classList.toggle('hidden')
     const c = document.querySelector('.tampa6')
-    c.classList.toggle('none')
+    c.classList.toggle('hidden')
     const d = document.querySelector('.segundapergunta')
     d.classList.toggle('margin-bottom')
 }
 
 function expande3(){
     const a = document.querySelector('.tampa7')
-    a.classList.toggle('none')
+    a.classList.toggle('hidden')
     const b = document.querySelector('.tampa8')
-    b.classList.toggle('none')
+    b.classList.toggle('hidden')
     const c = document.querySelector('.tampa9')
-    c.classList.toggle('none')
+    c.classList.toggle('hidden')
     const d = document.querySelector('.terceirapergunta')
     d.classList.toggle('margin-bottom')
 }
