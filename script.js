@@ -1,3 +1,16 @@
+function updatePage(){ //Essa função puxa todos os quizzes do servidor
+    const promiseQuizzes = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
+    promiseQuizzes.then(processPromise);
+}
+updatePage();
+
+function processPromise(promiseQuizzes){ //Essa função mostra a promise no console
+    console.log(promiseQuizzes);
+    console.log(promiseQuizzes.data);
+    allQuizzes = promiseQuizzes.data;
+}
+
+ 
 function expande1(){
     const a = document.querySelector('.tampa1')
     a.classList.toggle('hidden')
