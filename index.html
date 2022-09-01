@@ -14,7 +14,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./CSS/reset.css">
     <link rel="stylesheet" href="./CSS/style.css">
-    <link rel="stylesheet" href="./imagens">
 
     <title>Buzz Quizz</title>
 </head>
@@ -26,7 +25,7 @@
 
     <main>
         <!-- Mostra dos quizzez (Tela 2) -->
-        <div class="main-quizz">
+        <div class="main-quizz hidden">
             <div class="titulo-quizz">
                 <img src="https://tm.ibxk.com.br/2021/12/16/16162352596547.jpg" alt="Castelo">
                 <p>O quão potterhead é você?</p>
@@ -88,10 +87,10 @@
                         abaixo para usar o vira-tempo e reiniciar este teste.</p>
                 </div>
             </div>
-            <div class="botao-prosseguir">
+            <div class="reiniciar-quizz" onclick="reiniciarQuizz()">
                 Reiniciar Quizz
             </div>
-            <div class="voltar">
+            <div class="voltar" onclick="voltarPrincipal()">
                 Voltar pra home
             </div>
         </div>
@@ -132,7 +131,7 @@
 
                     <div class="engloba-pergunta">
                         <h1 class="pergunta margin-bottom primeirapergunta">Pergunta 1</h1>
-                        <img onclick="expande(this)" class="vector" src="imagens/Vector (1).png">
+                        <img onclick="expande(this)" class="vector" src="./img/Vector (1).png">
                     </div>
                     <div class="tampa1">
                         <form class="form-input">
@@ -181,7 +180,7 @@
                 <div class="caixa-perguntas">
                     <div class="engloba-pergunta">
                         <h1 class="pergunta segundapergunta">Pergunta 2</h1> <img onclick="expande2()" class="vector"
-                            src="imagens/Vector (1).png">
+                            src="./img/Vector (1).png">
                     </div>
                     <div class="tampa4 hidden">
                         <form class="form-input">
@@ -230,7 +229,7 @@
                 <div class="caixa-perguntas">
                     <div class="engloba-pergunta">
                         <h1 class="pergunta terceirapergunta">Pergunta 3</h1> <img onclick="expande3()" class="vector"
-                            src="imagens/Vector (1).png">
+                            src="./img/Vector (1).png">
                     </div>
                     <div class="tampa7 hidden">
                         <form class="form-input">
@@ -285,7 +284,7 @@
                 <div class="caixa-perguntas">
                     <div class="engloba-pergunta">
                         <h1 class="pergunta margin-bottom primeirapergunta">Nível 1</h1> <img onclick="expande1()"
-                            class="vector" src="imagens/Vector (1).png">
+                            class="vector" src="./img/Vector (1).png">
                     </div>
                     <div class="">
                         <form class="form-input">
@@ -310,7 +309,7 @@
                 <div class="caixa-perguntas">
                     <div class="engloba-pergunta">
                         <h1 class="pergunta segundapergunta">Nível 2</h1> <img onclick="expande2()" class="vector"
-                            src="imagens/Vector (1).png">
+                            src="./img/Vector (1).png">
                     </div>
                     <div class="hidden">
                         <form class="form-input">
@@ -334,7 +333,7 @@
                 <div class="caixa-perguntas">
                     <div class="engloba-pergunta">
                         <h1 class="pergunta terceirapergunta">Nível 3</h1> <img onclick="expande3()" class="vector"
-                            src="imagens/Vector (1).png">
+                            src="./img/Vector (1).png">
                     </div>
                     <div class="hidden">
                         <form class="form-input">
@@ -372,11 +371,11 @@
         </div>
 
         <!-- Tela Inicial (Tela 1) -->
-        <div class="tela-inicial hidden">
-            <div class="user-quizzes hidden" data-identifier="user-quizzes">
+        <div class="tela-inicial">
+            <div class="user-quizzes " data-identifier="user-quizzes">
                 <div class="create-your-quizz">
                     <p>Você não criou nenhum quizz ainda :(</p>
-                    <div data-identifier="create-quizz">Criar Quizz</div>
+                    <div data-identifier="create-quizz" onclick="criarQuizz()">Criar Quizz</div>
                 </div>
             </div>
 
@@ -385,7 +384,7 @@
             <div class="your-quizzes " data-identifier="user-quizzes">
                 <div class="title">
                     <p>Seus Quizzes</p>
-                    <div data-identifier="create-quizz">+</div>
+                    <div data-identifier="create-quizz" onclick="criarQuizz()">+</div>
                 </div>
                 <div class="quizzes">
                     <div class="quizz" data-identifier="quizz-card" onclick="selecionarQuizz(this)">

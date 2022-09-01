@@ -71,6 +71,7 @@ main {
    justify-content: center;
    font-size:30px;
    color:white;
+   cursor: pointer;
 }
 .user-quizzes{
    width: 80%;
@@ -114,6 +115,7 @@ main {
    display: flex;
    justify-content: center;
    align-items: center;
+   cursor: pointer;
 }
 
 .all-quizzes{
@@ -268,6 +270,30 @@ main {
    font-weight: 700;
    padding: 5px;
 }
+
+.reiniciar-quizz {
+   width: 25%;
+   background-color: #EC362D;
+   text-align: center;
+   font-size: 21px;
+   color: white;
+   padding: 1.3% 0;
+   border-radius: 15px;
+   margin-top: 3.5%;
+   cursor: pointer;
+   transition: .4s;
+   margin-bottom: 30px;
+}
+
+.voltar{
+   width: 30%;
+   font-size: 21px;
+   cursor: pointer;
+   text-align: center;
+   margin-bottom: 30px;
+   color:#818181;
+}
+
 
 .config{
    display: flex;
@@ -525,7 +551,6 @@ textarea::placeholder{
       top:20%;
    }
    .harry{
-      
       width:90%;
       margin-left:0;
    }
