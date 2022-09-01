@@ -17,3 +17,268 @@ h1 {
    font-size: 37px;
    font-weight: 700;
 }
+
+.config{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding-top: 5%;
+   transition: .4s;
+}
+
+.none{
+   display: none;
+}
+
+.margin{
+   margin-bottom: 25px;
+}
+
+.comeco{
+   margin-bottom: 15px;
+   font-family: 'Roboto';
+   font-style: normal;
+   font-weight: 700;
+   font-size: 23px;
+   line-height: 27px;
+   display: flex;
+   align-items: center;
+   color: #000000;
+   transition: .4s;
+}
+
+.engloba-pergunta{
+   display: flex;
+   justify-content: space-between;
+   transition: .4s;
+}
+
+.pergunta{
+   font-family: 'Roboto';
+   font-style: normal;
+   font-weight: 700;
+   font-size: 23px;
+   line-height: 27px;
+   display: flex;
+   align-items: center;
+   color: #000000;
+   transition: .4s;
+   margin-top: 10px;
+   
+}
+
+.margin-bottom{
+   margin-bottom: 15px;
+   
+}
+
+.vector{
+   width: 5%;
+   height: 5%;
+   margin-right: 10px;
+   margin-top: 8px;
+   cursor: pointer;
+   transition: .4s
+}
+
+.caixa-perguntas{
+   width: 45%;
+   height: auto;
+   background-color: #ffffff;
+   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+   border-radius: 10px;
+   padding: 1% 0.8% 1.4% 0.8%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   transition: .4s;
+   box-sizing: border-box;
+   margin-bottom: 15px;
+}
+
+.caixa-img-final{
+   width: 50%;
+   height: 50%;
+   position: absolute;
+   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url("../imagens/harry1.png");
+}
+
+.form-input{
+   width: 100%;
+   margin-bottom: 9px;
+   opacity: 60%;
+   transition: .4s;
+   overflow: wrap;
+}
+
+.form-input-margin{
+   width: 100%;
+   margin-bottom: 35px;
+   opacity: 60%;
+   transition: .4s;
+}
+
+#input-informacao{
+   width: 95.9%;
+   height: 40px;
+   border-radius: 10px;
+   border: 2px solid lightgrey;
+   outline: none;
+   font-size: 19px;
+   padding-left: 3%;
+   transition: .4s;
+}
+
+#input-informacao-nivel{
+   width: 95.9%;
+   height: 177px;
+   border-radius: 10px;
+   border: 2px solid lightgrey;
+   outline: none;
+   font-size: 19px;
+   padding-left: 3%;
+   transition: .4s;
+}
+
+textarea::placeholder{
+   font-family: 'Roboto', sans-serif;
+}
+
+.harry{
+   width: 50%;
+   height: auto;
+   margin-left: 25%;
+   border-radius: 20px;
+}
+
+.potterhead{
+   position: absolute;
+   top:84%;
+   left:27%;
+   color: #ffffff;
+   font-size: 125%;
+}
+
+.botao-prosseguir{
+   width: 30%;
+   background-color: #EC362D;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 1.3% 0;
+   border-radius: 15px;
+   margin-top: 3.5%;
+   cursor: pointer;
+   transition: .4s;
+   margin-bottom: 30px;
+}
+
+.botao-prosseguir-final{
+   width: 30%;
+   background-color: #EC362D;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 1.3% 0;
+   border-radius: 15px;
+   margin-top: 3.5%;
+   cursor: pointer;
+   transition: .4s;
+   margin-bottom: 0px;
+   position: absolute;
+   top:53%;
+}
+
+.voltar-home{
+   width: 30%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 1.3% 0;
+   border-radius: 15px;
+   margin-top: 0.5%;
+   transition: .4s;
+   margin-bottom: 0px;
+   position: absolute;
+   top:69%;
+}
+
+.prosseguir{
+   font-family: 'Roboto';
+   font-style: normal;
+   font-weight: 400;
+   font-size: 130%;
+   line-height: 25px;
+   display: flex;
+   align-items: center;
+   text-align: center;
+   color: #FFF5F4;
+   transition: .4s;
+}
+
+.prosseguir-home{
+   font-family: 'Roboto';
+   font-style: normal;
+   font-weight: 400;
+   font-size: 130%;
+   line-height: 25px;
+   display: flex;
+   align-items: center;
+   text-align: center;
+   color: grey;
+   transition: .4s;
+   cursor: pointer;
+   position: absolute;
+   
+}
+
+@media(max-width: 695px){
+   .caixa-perguntas{
+      width: 100%;
+      padding: 2% 1% 3.4% 5%;
+      
+   }
+   #input-informacao{
+      width: 90%;
+   }
+   #input-informacao-nivel{
+      width: 90%;
+   }
+   .botao-prosseguir{
+      width: 80%;
+   }
+   .prosseguir{
+      font-size: 110%
+   }
+   .comeco{
+      font-size: 20px;
+      margin-top: 32px;
+   }
+   .vector{
+      margin-top: 10px;
+      width: 7%;
+      height: 7%;
+   }
+   .caixa-img-final{
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      top:20%;
+   }
+   .harry{
+      
+      width:90%;
+      margin-left:0;
+   }
+   .potterhead{
+      left:12%
+   }
+   .voltar-home{
+      top: 80%;
+      width: 70%;
+   }
+   .botao-prosseguir-final{
+      top:68%;
+      width: 55%
+   }
+}
