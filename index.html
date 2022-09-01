@@ -26,7 +26,7 @@
 
     <main>
         <!-- Mostra dos quizzez (Tela 2) -->
-        <div class="main-quizz">
+        <div class="main-quizz hidden">
             <div class="titulo-quizz">
                 <img src="https://tm.ibxk.com.br/2021/12/16/16162352596547.jpg" alt="Castelo">
                 <p>O quão potterhead é você?</p>
@@ -372,7 +372,7 @@
         </div>
 
         <!-- Tela Inicial (Tela 1) -->
-        <div class="tela-inicial hidden">
+        <div class="tela-inicial">
             <div class="user-quizzes hidden" data-identifier="user-quizzes">
                 <div class="create-your-quizz">
                     <p>Você não criou nenhum quizz ainda :(</p>
@@ -387,7 +387,7 @@
                     <p>Seus Quizzes</p>
                     <div data-identifier="create-quizz">+</div>
                 </div>
-                <div class="quizzes">
+                <div class="quizzesUsers">
                     <div class="quizz" data-identifier="quizz-card" onclick="selecionarQuizz(this)">
                         <img src="img/bannerHP.png" />
                         <p>O quão Potterhead é você?</p>
@@ -433,6 +433,7 @@
 
 
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
 </body>
 
