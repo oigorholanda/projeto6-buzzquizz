@@ -65,6 +65,13 @@ function selecionarQuizz() {
     janelaQuizz.classList.remove('hidden');
 }
 
+function criarQuizz() {
+    const main = document.querySelector('.tela-inicial');
+    main.classList.add('hidden')
+    const janelaCriar = document.querySelector('.main-config');
+    janelaCriar.classList.remove('hidden');
+}
+
 function voltarPrincipal() {
     const janelaQuizz = document.querySelector('.main-quizz');
     janelaQuizz.classList.add('hidden');
