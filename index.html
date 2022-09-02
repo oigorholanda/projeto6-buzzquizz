@@ -20,7 +20,7 @@
 
 <body>
     <header>
-        <h1>BuzzQuizz</h1>
+        <h1 onclick="recarregaSite()">BuzzQuizz</h1>
     </header>
 
     <main>
@@ -33,49 +33,51 @@
 
             <div class="quadro-pergunta">
                 <div class="pergunta-quizz primeira">
-                    <p>Em qual animal Olho-Tonto Moody transfigurou Malfoy?</p>
+                    <p data-identifier="question">Em qual animal Olho-Tonto Moody transfigurou Malfoy?</p>
                 </div>
-                <div class="opcao opcao1">
-                    <img src="./img/image 3.png" alt="imagem opcao 1">
-                    <p>Gatíneo</p>
-                </div>
-                <div class="opcao opcao2">
-                    <img src="./img/image 4.png" alt="imagem opcao 2">
-                    <p>Ratata</p>
-                </div>
-                <div class="opcao opcao3">
-                    <img src="./img/image 1.png" alt="imagem opcao 3">
-                    <p>Sapo Gordo</p>
-                </div>
-                <div class="opcao opcao4">
-                    <img src="./img/image 2.png" alt="imagem opcao 4">
-                    <p>Mustela putorius (Famoso furão)</p>
-                </div>
+                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                        <img src="./img/image 3.png" alt="imagem opcao 1">
+                        <p>Gatíneo</p>
+                    </div>
+                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                        <img src="./img/image 4.png" alt="imagem opcao 2">
+                        <p>Ratata</p>
+                    </div>
+                    
+                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                        <img src="./img/image 1.png" alt="imagem opcao 3">
+                        <p>Sapo Gordo</p>
+                    </div>
+                    <div class="opcao opcao-correta" data-identifier="answer" onclick="selecionarOpcao(this)">
+                        <img src="./img/image 2.png" alt="imagem opcao 4">
+                        <p>Mustela putorius (Famoso furão)</p>
+                    </div>
+                
             </div>
 
             <div class="quadro-pergunta">
                 <div class="pergunta-quizz segunda">
-                    <p>Qual dos objetos abaixo NÃO é uma horcrux?</p>
+                    <p data-identifier="question">Qual dos objetos abaixo NÃO é uma horcrux?</p>
                 </div>
-                <div class="opcao opcao1">
+                <div class="opcao opcao1" data-identifier="answer" onclick="selecionarOpcao(this)">
                     <img src="./img/image 5.png" alt="imagem opcao 1">
                     <p>The boy who lived</p>
                 </div>
-                <div class="opcao opcao2">
+                <div class="opcao opcao2" data-identifier="answer" onclick="selecionarOpcao(this)">
                     <img src="./img/image 6.png" alt="imagem opcao 2">
                     <p>O livro monstruoso dos monstros</p>
                 </div>
-                <div class="opcao opcao3">
+                <div class="opcao opcao3" data-identifier="answer" onclick="selecionarOpcao(this)">
                     <img src="./img/image 7.png" alt="imagem opcao 3">
                     <p>Anel velho</p>
                 </div>
-                <div class="opcao opcao4">
+                <div class="opcao opcao4" data-identifier="answer" onclick="selecionarOpcao(this)">
                     <img src="./img/image 8.png" alt="imagem opcao 4">
                     <p>Diadema da Ravenclaw</p>
                 </div>
             </div>
 
-            <div class="quadro-resposta">
+            <div class="quadro-resposta" data-identifier="quizz-result">
                 <div class="resposta">
                     <p>88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
                 </div>
@@ -171,7 +173,6 @@
                 </div>
             </div>
 
-            <!-- ESSA PARTE AINDA NÃO AJUSTEI A RESPONSIVIDADE DO CSS NO MOBILE-->
 
             <div class="your-quizzes " data-identifier="user-quizzes">
                 <div class="title">
@@ -192,32 +193,7 @@
             </div>
             <div class="all-quizzes " data-identifier="general-quizzes">
                 <p>Todos os Quizzes</p>
-                <div class="quizzes">
-                    <div class="quizz" data-identifier="quizz-card" onclick="selecionarQuizz(this)">
-                        <img src="img/simpsons.png" />
-                        <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
-                    </div>
-                    <div class="quizz" data-identifier="quizz-card" onclick="selecionarQuizz(this)">
-                        <img src="img/simpsons.png" />
-                        <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
-                    </div>
-                    <div class="quizz" data-identifier="quizz-card" onclick="selecionarQuizz(this)">
-                        <img src="img/simpsons.png" />
-                        <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
-                    </div>
-                    <div class="quizz" data-identifier="quizz-card" onclick="selecionarQuizz(this)">
-                        <img src="img/simpsons.png" />
-                        <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
-                    </div>
-                    <div class="quizz" data-identifier="quizz-card" onclick="selecionarQuizz(this)">
-                        <img src="img/simpsons.png" />
-                        <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
-                    </div>
-                    <div class="quizz" data-identifier="quizz-card" onclick="selecionarQuizz(this)">
-                        <img src="img/simpsons.png" />
-                        <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
-                    </div>
-                </div>
+                <div class="quizzes"></div>
             </div>
         </div>
     </main>

@@ -8,8 +8,21 @@ function processPromise(promiseQuizzes){ //Essa função mostra a promise no con
     console.log(promiseQuizzes);
     console.log(promiseQuizzes.data);
     allQuizzes = promiseQuizzes.data;
+    renderizar();
 }
 
+function renderizar(){
+    const quizzes = document.querySelector(".quizzes");
+    quizzes.innerHTML = '';
+    for (let i = 0; i < allQuizzes.length; i++) {
+            quizzes.innerHTML += `
+            <div class="quizz" data-identifier="quizz-card" onclick="selecionarQuizz(this)">
+                        <img src="${allQuizzes[i].image}" />
+                        <p>${allQuizzes[i].title}</p>
+                    </div>
+            `
+        }
+}
  
 function expandePerguntas(fator){
     let x = fator.parentNode;
@@ -191,7 +204,21 @@ function geraNiveis(){
     }
 }
 
+function recarregaSite() {
+    window.location.reload()
+}
 
+function selecionarOpcao (objeto) {
+    objeto.classList.add('selecionado');
+    //adicionar o verde e vermelho nas opções
+    console.log(objeto);
+    const color = objeto.parentNode;
+    console.log(color);
+
+    //ajustar opacidade dos não clicados
+    //comparar se foi um acerto ou erro
+    // salvar o resultado
+}
 
 
 
