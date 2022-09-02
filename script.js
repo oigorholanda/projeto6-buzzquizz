@@ -8,9 +8,23 @@ function processPromise(promiseQuizzes){ //Essa função mostra a promise no con
     console.log(promiseQuizzes);
     console.log(promiseQuizzes.data);
     allQuizzes = promiseQuizzes.data;
+    renderizar();
 }
 
+function renderizar(){
+    const quizzes = document.querySelector(".quizzes");
+    quizzes.innerHTML = '';
+    for (let i = 0; i < allQuizzes.length; i++) {
+            quizzes.innerHTML += `
+            <div class="quizz" data-identifier="quizz-card" onclick="selecionarQuizz(this)">
+                        <img src="${allQuizzes[i].image}" />
+                        <p>${allQuizzes[i].title}</p>
+                    </div>
+            `
+        }
+}
  
+
 function expande1(){
     const a = document.querySelector('.tampa1')
     a.classList.toggle('hidden')
