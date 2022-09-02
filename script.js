@@ -78,3 +78,19 @@ function voltarPrincipal() {
     const main = document.querySelector('.tela-inicial');
     main.classList.remove('hidden');
 }
+
+function recarregaSite() {
+    window.location.reload()
+}
+
+function selecionarOpcao (objeto) {
+    objeto.classList.add('selecionado');
+    //adicionar o verde e vermelho nas opções
+    console.log(objeto);
+    const color = objeto.parentNode;
+    console.log(color);
+
+    //ajustar opacidade dos não clicados
+    //comparar se foi um acerto ou erro
+    // salvar o resultado
+}

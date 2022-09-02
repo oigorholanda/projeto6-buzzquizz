@@ -20,7 +20,7 @@
 
 <body>
     <header>
-        <h1>BuzzQuizz</h1>
+        <h1 onclick="recarregaSite()">BuzzQuizz</h1>
     </header>
 
     <main>
@@ -35,41 +35,43 @@
                 <div class="pergunta-quizz primeira">
                     <p data-identifier="question">Em qual animal Olho-Tonto Moody transfigurou Malfoy?</p>
                 </div>
-                <div class="opcao opcao1" data-identifier="answer">
-                    <img src="./img/image 3.png" alt="imagem opcao 1">
-                    <p>Gatíneo</p>
-                </div>
-                <div class="opcao opcao2" data-identifier="answer">
-                    <img src="./img/image 4.png" alt="imagem opcao 2">
-                    <p>Ratata</p>
-                </div>
-                <div class="opcao opcao3" data-identifier="answer">
-                    <img src="./img/image 1.png" alt="imagem opcao 3">
-                    <p>Sapo Gordo</p>
-                </div>
-                <div class="opcao opcao4" data-identifier="answer">
-                    <img src="./img/image 2.png" alt="imagem opcao 4">
-                    <p>Mustela putorius (Famoso furão)</p>
-                </div>
+                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                        <img src="./img/image 3.png" alt="imagem opcao 1">
+                        <p>Gatíneo</p>
+                    </div>
+                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                        <img src="./img/image 4.png" alt="imagem opcao 2">
+                        <p>Ratata</p>
+                    </div>
+                    
+                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                        <img src="./img/image 1.png" alt="imagem opcao 3">
+                        <p>Sapo Gordo</p>
+                    </div>
+                    <div class="opcao opcao-correta" data-identifier="answer" onclick="selecionarOpcao(this)">
+                        <img src="./img/image 2.png" alt="imagem opcao 4">
+                        <p>Mustela putorius (Famoso furão)</p>
+                    </div>
+                
             </div>
 
             <div class="quadro-pergunta">
                 <div class="pergunta-quizz segunda">
                     <p data-identifier="question">Qual dos objetos abaixo NÃO é uma horcrux?</p>
                 </div>
-                <div class="opcao opcao1" data-identifier="answer">
+                <div class="opcao opcao1" data-identifier="answer" onclick="selecionarOpcao(this)">
                     <img src="./img/image 5.png" alt="imagem opcao 1">
                     <p>The boy who lived</p>
                 </div>
-                <div class="opcao opcao2" data-identifier="answer">
+                <div class="opcao opcao2" data-identifier="answer" onclick="selecionarOpcao(this)">
                     <img src="./img/image 6.png" alt="imagem opcao 2">
                     <p>O livro monstruoso dos monstros</p>
                 </div>
-                <div class="opcao opcao3" data-identifier="answer">
+                <div class="opcao opcao3" data-identifier="answer" onclick="selecionarOpcao(this)">
                     <img src="./img/image 7.png" alt="imagem opcao 3">
                     <p>Anel velho</p>
                 </div>
-                <div class="opcao opcao4" data-identifier="answer">
+                <div class="opcao opcao4" data-identifier="answer" onclick="selecionarOpcao(this)">
                     <img src="./img/image 8.png" alt="imagem opcao 4">
                     <p>Diadema da Ravenclaw</p>
                 </div>
@@ -98,7 +100,7 @@
         <!-- Criação dos quizzez (Tela 3) -->
         <div class="main-config hidden">
             <div class="config">
-                <h1 class="comeco">Comece pelo começo</h1>
+                <p class="comeco">Comece pelo começo</p>
                 <div class="caixa-perguntas">
                     <form class="form-input">
                         <input type="text" id='input-informacao' placeholder="Título do seu quizz" autocomplete="off">
@@ -126,11 +128,11 @@
             </div>
 
             <div class="config ">
-                <h1 class="comeco">Crie suas peguntas</h1>
+                <p class="comeco">Crie suas peguntas</p>
                 <div class="caixa-perguntas">
 
                     <div class="engloba-pergunta">
-                        <h1 class="pergunta margin-bottom primeirapergunta">Pergunta 1</h1>
+                        <p class="pergunta margin-bottom primeirapergunta">Pergunta 1</p>
                         <img onclick="expande(this)" class="vector" src="./img/Vector (1).png">
                     </div>
                     <div class="tampa1">
@@ -144,7 +146,7 @@
                     </div>
 
                     <div class="tampa2">
-                        <h1 class="pergunta margin-bottom">Resposta correta</h1>
+                        <p class="pergunta margin-bottom">Resposta correta</p>
                         <form class="form-input">
                             <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
                         </form>
@@ -154,7 +156,7 @@
                     </div>
 
                     <div class="tampa3">
-                        <h1 class="pergunta margin-bottom">Respostas incorretas</h1>
+                        <p class="pergunta margin-bottom">Respostas incorretas</p>
                         <form class="form-input">
                             <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
                         </form>
@@ -179,7 +181,7 @@
 
                 <div class="caixa-perguntas">
                     <div class="engloba-pergunta">
-                        <h1 class="pergunta segundapergunta">Pergunta 2</h1> <img onclick="expande2()" class="vector"
+                        <p class="pergunta segundapergunta">Pergunta 2</p> <img onclick="expande2()" class="vector"
                             src="./img/Vector (1).png">
                     </div>
                     <div class="tampa4 hidden">
@@ -193,7 +195,7 @@
                     </div>
 
                     <div class="tampa5 hidden">
-                        <h1 class="pergunta margin-bottom">Resposta correta</h1>
+                        <p class="pergunta margin-bottom">Resposta correta</p>
                         <form class="form-input">
                             <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
                         </form>
@@ -203,7 +205,7 @@
                     </div>
 
                     <div class="tampa6 hidden">
-                        <h1 class="pergunta margin-bottom">Respostas incorretas</h1>
+                        <p class="pergunta margin-bottom">Respostas incorretas</p>
                         <form class="form-input">
                             <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
                         </form>
@@ -228,7 +230,7 @@
 
                 <div class="caixa-perguntas">
                     <div class="engloba-pergunta">
-                        <h1 class="pergunta terceirapergunta">Pergunta 3</h1> <img onclick="expande3()" class="vector"
+                        <p class="pergunta terceirapergunta">Pergunta 3</p> <img onclick="expande3()" class="vector"
                             src="./img/Vector (1).png">
                     </div>
                     <div class="tampa7 hidden">
@@ -242,7 +244,7 @@
                     </div>
 
                     <div class="tampa8 hidden">
-                        <h1 class="pergunta margin-bottom">Resposta correta</h1>
+                        <p class="pergunta margin-bottom">Resposta correta</p>
                         <form class="form-input">
                             <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
                         </form>
@@ -252,7 +254,7 @@
                     </div>
 
                     <div class="tampa9 hidden">
-                        <h1 class="pergunta margin-bottom">Respostas incorretas</h1>
+                        <p class="pergunta margin-bottom">Respostas incorretas</p>
                         <form class="form-input">
                             <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
                         </form>
@@ -280,10 +282,10 @@
             </div>
 
             <div class="config">
-                <h1 class="comeco">Agora, decida os níveis</h1>
+                <p class="comeco">Agora, decida os níveis</p>
                 <div class="caixa-perguntas">
                     <div class="engloba-pergunta">
-                        <h1 class="pergunta margin-bottom primeirapergunta">Nível 1</h1> <img onclick="expande1()"
+                        <p class="pergunta margin-bottom primeirapergunta">Nível 1</p> <img onclick="expande1()"
                             class="vector" src="./img/Vector (1).png">
                     </div>
                     <div class="">
@@ -308,7 +310,7 @@
 
                 <div class="caixa-perguntas">
                     <div class="engloba-pergunta">
-                        <h1 class="pergunta segundapergunta">Nível 2</h1> <img onclick="expande2()" class="vector"
+                        <p class="pergunta segundapergunta">Nível 2</p> <img onclick="expande2()" class="vector"
                             src="./img/Vector (1).png">
                     </div>
                     <div class="hidden">
@@ -332,7 +334,7 @@
 
                 <div class="caixa-perguntas">
                     <div class="engloba-pergunta">
-                        <h1 class="pergunta terceirapergunta">Nível 3</h1> <img onclick="expande3()" class="vector"
+                        <p class="pergunta terceirapergunta">Nível 3</p> <img onclick="expande3()" class="vector"
                             src="./img/Vector (1).png">
                     </div>
                     <div class="hidden">
@@ -379,7 +381,6 @@
                 </div>
             </div>
 
-            <!-- ESSA PARTE AINDA NÃO AJUSTEI A RESPONSIVIDADE DO CSS NO MOBILE-->
 
             <div class="your-quizzes " data-identifier="user-quizzes">
                 <div class="title">

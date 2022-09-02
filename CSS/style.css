@@ -20,6 +20,7 @@ h1 {
    color: white;
    font-size: 37px;
    font-weight: 700;
+   cursor: pointer;
 }
 
 main {
@@ -129,6 +130,7 @@ main {
    flex-wrap: wrap;
    width:100%;
    justify-content: space-between;
+   cursor: pointer;
 }
 .quizzesUsers{
    display:flex;
@@ -150,6 +152,7 @@ main {
    width: 340px;
    height: 181px;
    margin-top:12px;
+   cursor: pointer;
 }
    
 .quizz img {
@@ -193,9 +196,19 @@ main {
 
 }
 
+.titulo-quizz::before {
+      content: ' ';
+      z-index: 1;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #00000080;
+}
+
 .titulo-quizz img {
    width: 100%;
-   
 }
 
 
@@ -205,6 +218,7 @@ main {
    font-size: 39px;
    font-weight: 400;
    line-height: 46px;
+   z-index: 2;
 }
 
 .quadro-pergunta {
@@ -240,6 +254,7 @@ main {
    font-size: 20px;
    color: #000000;
    font-weight: 700;
+   cursor: pointer;
 }
 
 .opcao img {
@@ -249,6 +264,8 @@ main {
 .opcao p {
    margin-top: 7px;
 }
+
+
 
 .quadro-resposta {
    display: grid;
