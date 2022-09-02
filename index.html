@@ -96,282 +96,74 @@
         </div>
 
         <!-- Criação dos quizzez (Tela 3) -->
-        <div class="main-config hidden">
-            <div class="config">
-                <h1 class="comeco">Comece pelo começo</h1>
-                <div class="caixa-perguntas">
-                    <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Título do seu quizz" autocomplete="off">
-                    </form>
+        
+        <div class="config hidden criando">
+            <h1 class="comeco">Comece pelo começo</h1>
+            <div class="caixa-perguntas">
+                <form class="form-input">
+                    <input type="text" id='input-informacao' class = "criacao-titulo-do-quiz" placeholder="Título do seu quizz" autocomplete="off">
+                </form>
 
-                    <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="URL da imagem do seu quizz"
-                            autocomplete="off">
-                    </form>
+                <form class="form-input">
+                    <input type="text" id='input-informacao' class = "url-imagem-quiz" placeholder="URL da imagem do seu quizz"
+                        autocomplete="off">
+                </form>
 
-                    <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Quantidade de perguntas do quizz"
-                            autocomplete="off">
-                    </form>
+                <form class="form-input">
+                    <input type="text" id='input-informacao' class = "criacao-perguntas-quiz" placeholder="Quantidade de perguntas do quizz"
+                        autocomplete="off">
+                </form>
 
-                    <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Quantidade de níveis do quizz"
-                            autocomplete="off">
-                    </form>
-                </div>
-
-                <div class="botao-prosseguir">
-                    <p class="prosseguir">Prosseguir para criar perguntas</p>
-                </div>
+                <form class="form-input">
+                    <input type="text" id='input-informacao' class = "criacao-niveis-quiz" placeholder="Quantidade de níveis do quizz"
+                        autocomplete="off">
+                </form>
             </div>
 
-            <div class="config ">
-                <h1 class="comeco">Crie suas peguntas</h1>
-                <div class="caixa-perguntas">
-
-                    <div class="engloba-pergunta">
-                        <h1 class="pergunta margin-bottom primeirapergunta">Pergunta 1</h1>
-                        <img onclick="expande(this)" class="vector" src="./img/Vector (1).png">
-                    </div>
-                    <div class="tampa1">
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Texto da pergunta" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Cor de fundo da pergunta"
-                                autocomplete="off">
-                        </form>
-                    </div>
-
-                    <div class="tampa2">
-                        <h1 class="pergunta margin-bottom">Resposta correta</h1>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
-                        </form>
-                    </div>
-
-                    <div class="tampa3">
-                        <h1 class="pergunta margin-bottom">Respostas incorretas</h1>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
-                        </form>
-                        <form class="form-input-margin">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
-                        </form>
-                        <form class="form-input-margin">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
-                        </form>
-                        <form class="form-input-margin">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
-                        </form>
-                    </div>
-                </div>
-
-
-                <div class="caixa-perguntas">
-                    <div class="engloba-pergunta">
-                        <h1 class="pergunta segundapergunta">Pergunta 2</h1> <img onclick="expande2()" class="vector"
-                            src="./img/Vector (1).png">
-                    </div>
-                    <div class="tampa4 hidden">
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Texto da pergunta" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Cor de fundo da pergunta"
-                                autocomplete="off">
-                        </form>
-                    </div>
-
-                    <div class="tampa5 hidden">
-                        <h1 class="pergunta margin-bottom">Resposta correta</h1>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
-                        </form>
-                    </div>
-
-                    <div class="tampa6 hidden">
-                        <h1 class="pergunta margin-bottom">Respostas incorretas</h1>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
-                        </form>
-                        <form class="form-input-margin">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
-                        </form>
-                        <form class="form-input-margin">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
-                        </form>
-                        <form class="form-input-margin">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
-                        </form>
-                    </div>
-                </div>
-
-
-                <div class="caixa-perguntas">
-                    <div class="engloba-pergunta">
-                        <h1 class="pergunta terceirapergunta">Pergunta 3</h1> <img onclick="expande3()" class="vector"
-                            src="./img/Vector (1).png">
-                    </div>
-                    <div class="tampa7 hidden">
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Texto da pergunta" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Cor de fundo da pergunta"
-                                autocomplete="off">
-                        </form>
-                    </div>
-
-                    <div class="tampa8 hidden">
-                        <h1 class="pergunta margin-bottom">Resposta correta</h1>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
-                        </form>
-                    </div>
-
-                    <div class="tampa9 hidden">
-                        <h1 class="pergunta margin-bottom">Respostas incorretas</h1>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
-                        </form>
-                        <form class="form-input-margin">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
-                        </form>
-                        <form class="form-input-margin">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
-                        </form>
-                        <form class="form-input-margin">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
-                        </form>
-                    </div>
-                </div>
-
-                <div class="botao-prosseguir">
-                    <p class="prosseguir">Prosseguir para criar níveis</p>
-                </div>
-            </div>
-
-            <div class="config">
-                <h1 class="comeco">Agora, decida os níveis</h1>
-                <div class="caixa-perguntas">
-                    <div class="engloba-pergunta">
-                        <h1 class="pergunta margin-bottom primeirapergunta">Nível 1</h1> <img onclick="expande1()"
-                            class="vector" src="./img/Vector (1).png">
-                    </div>
-                    <div class="">
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Título do nível" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="% de acerto mínima"
-                                autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem do nível"
-                                autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <textarea id='input-informacao-nivel' rows="4" cols="20" placeholder="Descrição do nível"
-                                autocomplete="off"></textarea>
-                        </form>
-                    </div>
-                </div>
-
-
-                <div class="caixa-perguntas">
-                    <div class="engloba-pergunta">
-                        <h1 class="pergunta segundapergunta">Nível 2</h1> <img onclick="expande2()" class="vector"
-                            src="./img/Vector (1).png">
-                    </div>
-                    <div class="hidden">
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Título do nível" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="% de acerto mínima"
-                                autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem do nível"
-                                autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao-nivel' placeholder="Descrição do nível"
-                                autocomplete="off">
-                        </form>
-                    </div>
-                </div>
-
-                <div class="caixa-perguntas">
-                    <div class="engloba-pergunta">
-                        <h1 class="pergunta terceirapergunta">Nível 3</h1> <img onclick="expande3()" class="vector"
-                            src="./img/Vector (1).png">
-                    </div>
-                    <div class="hidden">
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="Título do nível" autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="% de acerto mínima"
-                                autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao' placeholder="URL da imagem do nível"
-                                autocomplete="off">
-                        </form>
-                        <form class="form-input">
-                            <input type="text" id='input-informacao-nivel' placeholder="Descrição do nível"
-                                autocomplete="off">
-                        </form>
-                    </div>
-                </div>
-
-                <div class="botao-prosseguir">
-                    <p class="prosseguir">Prosseguir para criar níveis</p>
-                </div>
-            </div>
-
-            <div class="config hidden">
-                <div class="caixa-img-final"></div>
-                <div class="botao-prosseguir-final">
-                    <p class="prosseguir">Acessar o quiz</p>
-                </div>
-                <div class="voltar-home">
-                    <p class="prosseguir-home">Voltar para home</p>
-                </div>
+            <div onclick = "prossigaParaPerguntas()" class="botao-prosseguir">
+                <p class="prosseguir">Prosseguir para criar perguntas</p>
             </div>
         </div>
 
+        <div class="config hidden perguntando">
+            <h1 class="comeco">Crie suas peguntas</h1>
+
+            <div class = "perguntas-aqui-dentro">
+
+            </div>
+
+            <div  onclick = "prossigaParaNiveis()" class="botao-prosseguir">
+                <p class="prosseguir">Prosseguir para criar níveis</p>
+            </div>
+        </div>
+
+        <div class="config hidden nivelando">
+            <h1 class="comeco">Agora, decida os níveis</h1>
+
+            <div class = "niveis-aqui-dentro">
+
+            </div>
+
+            <div onclick = "finalizaQuizz()" class="botao-prosseguir">
+                <p class="prosseguir" >Finalizar quizz</p>
+            </div>
+        </div>
+
+        <div class="config hidden finalizando">
+            <div class="caixa-img-final">
+                <p class = "potterhead">O quão potterhead você é?</p>
+            </div>
+            <div class="botao-prosseguir-final">
+                <p class="prosseguir">Acessar o quiz</p>
+            </div>
+            <div onclick = "voltaHome()" class="voltar-home">
+                <p class="prosseguir-home">Voltar para home</p>
+            </div>
+        </div>
+    
+
         <!-- Tela Inicial (Tela 1) -->
-        <div class="tela-inicial hidden">
+        <div class="tela-inicial">
             <div class="user-quizzes hidden" data-identifier="user-quizzes">
                 <div class="create-your-quizz">
                     <p>Você não criou nenhum quizz ainda :(</p>
