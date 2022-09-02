@@ -139,10 +139,11 @@ function geraPerguntas(){
                 </div>
                 <div class="tampa hidden">
                     <form class="form-input">
-                        <input type="text" class = "texto-pergunta${i + 1}id='input-informacao' placeholder="Texto da pergunta" autocomplete="off">
+                        <input type="text" id='input-informacao' placeholder="Texto da pergunta" autocomplete="off">
                     </form>
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Cor de fundo da pergunta"
+                        <p class = "escolha-cor-fundo">Escolha a cor de fundo da pergunta</p>
+                        <input type="color" id='input-informacao' class = "cor-de-fundo-pergunta${i + 1}" placeholder="Cor de fundo da pergunta"
                             autocomplete="off">
                     </form>
                 </div>
