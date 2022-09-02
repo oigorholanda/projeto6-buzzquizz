@@ -75,6 +75,16 @@ function prossigaParaNiveis(){
     geraNiveis();
 }
 
+function finalizandoQuiz(){
+
+    finalizaQuizz();
+    validaTituloQuiz();
+    validaURL();
+    geraTelaFinal();
+    alteraURL()
+    
+}
+
 function criePerguntas(){
     const x = document.querySelector('.criando');
     x.classList.add('hidden');
@@ -129,7 +139,7 @@ function geraPerguntas(){
                 </div>
                 <div class="tampa hidden">
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Texto da pergunta" autocomplete="off">
+                        <input type="text" class = "texto-pergunta${i + 1}id='input-informacao' placeholder="Texto da pergunta" autocomplete="off">
                     </form>
                     <form class="form-input">
                         <input type="text" id='input-informacao' placeholder="Cor de fundo da pergunta"
@@ -203,6 +213,48 @@ function geraNiveis(){
         `
     }
 }
+
+
+let tituloDoQuiz;
+function validaTituloQuiz(){
+    tituloDoQuiz = document.querySelector('.criacao-titulo-do-quiz').value;
+}
+
+let urlImgQuiz;
+function validaURL(){
+    urlImgQuiz = document.querySelector('.url-imagem-quiz').value;
+}
+
+
+function geraTelaFinal(){
+    
+    let x = document.querySelector('.finalizando');
+
+    x.innerHTML = `
+    <div class="caixa-img-final">
+        <p class = "potterhead">${tituloDoQuiz}</p>
+    </div>
+    <div class="botao-prosseguir-final">
+        <p class="prosseguir">Acessar o quiz</p>
+    </div>
+    <div onclick = "voltaHome()" class="voltar-home">
+        <p class="prosseguir-home">Voltar para home</p>
+    </div>
+    `
+}
+
+function alteraURL(){
+    const x = document.querySelector('.caixa-img-final');
+    x.style.background = `linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url("${urlImgQuiz}") no-repeat top center`
+}
+
+
+
+
+
+
+
+
 
 function recarregaSite() {
     window.location.reload()
