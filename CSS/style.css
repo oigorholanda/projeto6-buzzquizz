@@ -190,10 +190,12 @@ main {
    display: flex;
    justify-content: center;
    align-items: center;
+
 }
 
 .titulo-quizz img {
    width: 100%;
+   
 }
 
 
