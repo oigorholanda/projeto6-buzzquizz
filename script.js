@@ -1,3 +1,7 @@
+let qtdPergunta;
+let perguntas;
+let tituloPergunta;
+
 function updatePage(){ //Essa função puxa todos os quizzes do servidor
     const promiseQuizzes = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
     promiseQuizzes.then(processPromise);
@@ -8,8 +12,15 @@ function processPromise(promiseQuizzes){ //Essa função mostra a promise no con
     console.log(promiseQuizzes);
     console.log(promiseQuizzes.data);
     allQuizzes = promiseQuizzes.data;
+    for(let i = 0; i < allQuizzes.length; i++){
+        qtdPergunta = allQuizzes[i].questions.length;
+        perguntas = allQuizzes[i].questions;
+        tituloPergunta = allQuizzes[i].questions[i].title;
+    }
+    console.log(tituloPergunta);
     renderizar();
 }
+
 
 function renderizar(){
     const quizzes = document.querySelector(".quizzes");
@@ -24,6 +35,81 @@ function renderizar(){
         }
 }
  
+function renderizarPerguntas(){
+    const quadroPergunta = document.querySelector(".quadro-pergunta");
+    quadroPergunta.innerHTML = '';
+    for (let i = 0; i < qtdPergunta; i++) {
+        quadroPergunta.innerHTML +=
+    
+        `<div class="quadro-pergunta">
+                <div class="pergunta-quizz primeira">
+                    <p data-identifier="question">${tituloPergunta}</p>
+                </div>
+                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                        <img src="./img/image 3.png" alt="imagem opcao 1">
+                        <p>Gatíneo</p>
+                    </div>
+                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                        <img src="./img/image 4.png" alt="imagem opcao 2">
+                        <p>Ratata</p>
+                    </div>
+                    
+                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                        <img src="./img/image 1.png" alt="imagem opcao 3">
+                        <p>Sapo Gordo</p>
+                    </div>
+                    <div class="opcao opcao-correta" data-identifier="answer" onclick="selecionarOpcao(this)">
+                        <img src="./img/image 2.png" alt="imagem opcao 4">
+                        <p>Mustela putorius (Famoso furão)</p>
+                    </div>
+                
+            </div>
+
+            <div class="quadro-pergunta">
+                <div class="pergunta-quizz segunda">
+                    <p data-identifier="question">Qual dos objetos abaixo NÃO é uma horcrux?</p>
+                </div>
+                <div class="opcao opcao1" data-identifier="answer" onclick="selecionarOpcao(this)">
+                    <img src="./img/image 5.png" alt="imagem opcao 1">
+                    <p>The boy who lived</p>
+                </div>
+                <div class="opcao opcao2" data-identifier="answer" onclick="selecionarOpcao(this)">
+                    <img src="./img/image 6.png" alt="imagem opcao 2">
+                    <p>O livro monstruoso dos monstros</p>
+                </div>
+                <div class="opcao opcao3" data-identifier="answer" onclick="selecionarOpcao(this)">
+                    <img src="./img/image 7.png" alt="imagem opcao 3">
+                    <p>Anel velho</p>
+                </div>
+                <div class="opcao opcao4" data-identifier="answer" onclick="selecionarOpcao(this)">
+                    <img src="./img/image 8.png" alt="imagem opcao 4">
+                    <p>Diadema da Ravenclaw</p>
+                </div>
+            </div>
+
+            <div class="quadro-resposta" data-identifier="quizz-result">
+                <div class="resposta">
+                    <p>88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
+                </div>
+                <div class="resultado">
+                    <img src="./img/resultado1.png" alt="imagem opcao 4">
+                </div>
+                <div class="texto-resposta">
+                    <p>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão
+                        abaixo para usar o vira-tempo e reiniciar este teste.</p>
+                </div>
+            </div>
+            <div class="reiniciar-quizz" onclick="reiniciarQuizz()">
+                Reiniciar Quizz
+            </div>
+            <div class="voltar" onclick="voltarPrincipal()">
+                Voltar pra home
+            </div>
+        </div>`
+    }
+}
+
+
 function expandePerguntas(fator){
     let x = fator.parentNode;
     let y = x.parentNode;
