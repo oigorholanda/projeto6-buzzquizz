@@ -117,6 +117,9 @@ function selecionarQuizz() {
     main.classList.add('hidden')
     const janelaQuizz = document.querySelector('.main-quizz');
     janelaQuizz.classList.remove('hidden');
+
+    document.body.scrollTop = 0; // scroll top page Safari
+    document.documentElement.scrollTop = 0; // scroll top page Chrome, Firefox, IE and Opera 
 }
 
 function criarQuizz() {
