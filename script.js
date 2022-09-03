@@ -1,6 +1,10 @@
+let allQuizzes;
+let tituloQuizz;
 let qtdPergunta;
-let perguntas;
-let tituloPergunta;
+let perguntas = [];
+let imagemQuizz;
+let niveis;
+
 
 function updatePage(){ //Essa função puxa todos os quizzes do servidor
     const promiseQuizzes = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
@@ -9,15 +13,10 @@ function updatePage(){ //Essa função puxa todos os quizzes do servidor
 updatePage();
 
 function processPromise(promiseQuizzes){ //Essa função mostra a promise no console
-    console.log(promiseQuizzes);
-    console.log(promiseQuizzes.data);
     allQuizzes = promiseQuizzes.data;
-    for(let i = 0; i < allQuizzes.length; i++){
-        qtdPergunta = allQuizzes[i].questions.length;
-        perguntas = allQuizzes[i].questions;
-        tituloPergunta = allQuizzes[i].questions[i].title;
-    }
-    console.log(tituloPergunta);
+    console.log(allQuizzes);
+    
+    
     renderizar();
 }
 
@@ -27,7 +26,7 @@ function renderizar(){
     quizzes.innerHTML = '';
     for (let i = 0; i < allQuizzes.length; i++) {
             quizzes.innerHTML += `
-            <div class="quizz" data-identifier="quizz-card" onclick="selecionarQuizz(this)">
+            <div class="quizz" id="${allQuizzes[i].id}" data-identifier="quizz-card" onclick="renderizarQuizz(this)">
                         <img src="${allQuizzes[i].image}" />
                         <p>${allQuizzes[i].title}</p>
                     </div>
@@ -35,59 +34,62 @@ function renderizar(){
         }
 }
  
-function renderizarPerguntas(){
-    const quadroPergunta = document.querySelector(".quadro-pergunta");
-    quadroPergunta.innerHTML = '';
-    for (let i = 0; i < qtdPergunta; i++) {
-        quadroPergunta.innerHTML +=
+function renderizarQuizz(quizzClicado){
+    console.log(quizzClicado);
+    const seletor = Number(quizzClicado.id);
+
+    const mainqz = document.querySelector(".main-quizz");
+    mainqz.innerHTML = '';
     
-        `<div class="quadro-pergunta">
-                <div class="pergunta-quizz primeira">
-                    <p data-identifier="question">${tituloPergunta}</p>
-                </div>
-                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
-                        <img src="./img/image 3.png" alt="imagem opcao 1">
-                        <p>Gatíneo</p>
-                    </div>
-                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
-                        <img src="./img/image 4.png" alt="imagem opcao 2">
-                        <p>Ratata</p>
-                    </div>
-                    
-                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
-                        <img src="./img/image 1.png" alt="imagem opcao 3">
-                        <p>Sapo Gordo</p>
-                    </div>
-                    <div class="opcao opcao-correta" data-identifier="answer" onclick="selecionarOpcao(this)">
-                        <img src="./img/image 2.png" alt="imagem opcao 4">
-                        <p>Mustela putorius (Famoso furão)</p>
-                    </div>
-                
+    for(let i = 0; i < allQuizzes.length; i++){
+        if (seletor === allQuizzes[i].id) {
+            imagemQuizz = allQuizzes[i].image;
+            niveis = allQuizzes[i].levels;
+            perguntas = allQuizzes[i].questions;
+            tituloQuizz = allQuizzes[i].title;
+            qtdPergunta = allQuizzes[i].questions.length;
+            console.log(allQuizzes[i]);
+        }
+    }
+    
+    console.log(perguntas);
+    mainqz.innerHTML = `
+    <div class="titulo-quizz">
+    <img src="${imagemQuizz}" alt="Castelo">
+    <p>${tituloQuizz}</p>
+    </div>
+    `
+    for (let i = 0; i < qtdPergunta; i++) {
+        mainqz.innerHTML +=
+        `
+        <div class="quadro-pergunta">
+            <div class="pergunta-quizz pergunta${i}" style="background-color:${perguntas[i].color};">
+                <p data-identifier="question">${perguntas[i].title}</p>
             </div>
-
-            <div class="quadro-pergunta">
-                <div class="pergunta-quizz segunda">
-                    <p data-identifier="question">Qual dos objetos abaixo NÃO é uma horcrux?</p>
-                </div>
-                <div class="opcao opcao1" data-identifier="answer" onclick="selecionarOpcao(this)">
-                    <img src="./img/image 5.png" alt="imagem opcao 1">
-                    <p>The boy who lived</p>
-                </div>
-                <div class="opcao opcao2" data-identifier="answer" onclick="selecionarOpcao(this)">
-                    <img src="./img/image 6.png" alt="imagem opcao 2">
-                    <p>O livro monstruoso dos monstros</p>
-                </div>
-                <div class="opcao opcao3" data-identifier="answer" onclick="selecionarOpcao(this)">
-                    <img src="./img/image 7.png" alt="imagem opcao 3">
-                    <p>Anel velho</p>
-                </div>
-                <div class="opcao opcao4" data-identifier="answer" onclick="selecionarOpcao(this)">
-                    <img src="./img/image 8.png" alt="imagem opcao 4">
-                    <p>Diadema da Ravenclaw</p>
-                </div>
+            <div class="opcao opcao-correta" data-identifier="answer" onclick="selecionarOpcao(this)">
+                <img src=${perguntas[i].answers[0].image} alt="imagem opcao 1">
+                <p>${perguntas[i].answers[0].text}</p>
             </div>
+            <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                <img src=${perguntas[i].answers[1].image} alt="imagem opcao 2">
+                <p>${perguntas[i].answers[1].text}</p>
+            </div>
+            `
 
-            <div class="quadro-resposta" data-identifier="quizz-result">
+        //     <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+        //         <img src="${perguntas[i].answers[2].image}" alt="imagem opcao 3">
+        //         <p>${perguntas[i].answers[2].text}</p>
+        //     </div>
+        //     <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+        //         <img src="${perguntas[i].answers[3].image}" alt="imagem opcao 4">
+        //         <p${perguntas[i].answers[3].text}</p>
+        //     </div>
+        // </div>
+        //   `
+    }
+
+    mainqz.innerHTML += `
+    <div class="quadro-resposta hidden" data-identifier="quizz-result">
                 <div class="resposta">
                     <p>88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
                 </div>
@@ -105,27 +107,9 @@ function renderizarPerguntas(){
             <div class="voltar" onclick="voltarPrincipal()">
                 Voltar pra home
             </div>
-        </div>`
-    }
-}
+            `
 
-
-function expandePerguntas(fator){
-    let x = fator.parentNode;
-    let y = x.parentNode;
-    const tampa1 = y.children[1]
-    tampa1.classList.toggle('hidden')
-    const tampa2 = y.children[2]
-    tampa2.classList.toggle('hidden')
-    const tampa3 = y.children[3]
-    tampa3.classList.toggle('hidden')
-}
-
-function expandeNiveis(fator){
-    let x = fator.parentNode;
-    let y = x.parentNode;
-    const tampa1 = y.children[1]
-    tampa1.classList.toggle('hidden')
+    selecionarQuizz();
 }
 
 function selecionarQuizz() {
@@ -147,6 +131,25 @@ function voltarPrincipal() {
     janelaQuizz.classList.add('hidden');
     const main = document.querySelector('.tela-inicial');
     main.classList.remove('hidden');
+}
+
+
+function expandePerguntas(fator){
+    let x = fator.parentNode;
+    let y = x.parentNode;
+    const tampa1 = y.children[1]
+    tampa1.classList.toggle('hidden')
+    const tampa2 = y.children[2]
+    tampa2.classList.toggle('hidden')
+    const tampa3 = y.children[3]
+    tampa3.classList.toggle('hidden')
+}
+
+function expandeNiveis(fator){
+    let x = fator.parentNode;
+    let y = x.parentNode;
+    const tampa1 = y.children[1]
+    tampa1.classList.toggle('hidden')
 }
 
 function prossigaParaPerguntas(){
@@ -358,22 +361,22 @@ function selecionarOpcao (objeto) {
 function mostrarResposta () {
     const indiceResposta = document.querySelectorAll('.respondido')
 
-    if (indiceResposta.length === 2){
-        const resp = document.querySelector('.quadro-resposta');
-        resp.classList.remove('hidden');
+    if (indiceResposta.length === 3){
+        const qdresp = document.querySelector('.quadro-resposta');
+        qdresp.classList.remove('hidden');
     }
 }
 
 function reiniciarQuizz () {
-    const rmv = document.querySelectorAll('.respondido');
-    const desc = document.querySelectorAll('.selecionado');
-    for (let i = 0; i < desc.length; i++) {
-        desc[i].classList.remove('selecionado');
-        rmv[i].classList.remove('respondido'); 
+    const resp = document.querySelectorAll('.respondido');
+    const selec = document.querySelectorAll('.selecionado');
+    for (let i = 0; i < selec.length; i++) {
+        selec[i].classList.remove('selecionado');
+        resp[i].classList.remove('respondido'); 
     }
 
-    const resp = document.querySelector('.quadro-resposta');
-    resp.classList.add('hidden');
+    const qresp = document.querySelector('.quadro-resposta');
+    qresp.classList.add('hidden');
 
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera 
