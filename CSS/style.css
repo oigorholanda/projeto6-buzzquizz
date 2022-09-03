@@ -75,7 +75,7 @@ main {
    cursor: pointer;
 }
 .user-quizzes{
-   width: 80%;
+   width: 80vw;
    height: 181px;
    margin: 7vh auto;
    background: transparent;
@@ -120,21 +120,21 @@ main {
 }
 
 .all-quizzes{
-   width:80%;
+   width:80vw;
    display: flex;
    flex-direction: column;
-   justify-content: left;
+   justify-content: flex-start;
 }
 .quizzes{
    display:flex;
    flex-wrap: wrap;
    width:100%;
-   justify-content: space-between;
+   justify-content: flex-start;
    cursor: pointer;
 }
 .quizzesUsers{
    display:flex;
-   flex-wrap: wrap;
+   justify-content:flex-start;
    width:100%;
 }
 .all-quizzes p{
@@ -151,7 +151,7 @@ main {
    position:relative;
    width: 340px;
    height: 181px;
-   margin-top:12px;
+   margin:12px 12px 0px 0px;
    cursor: pointer;
 }
    
@@ -461,6 +461,10 @@ main {
 textarea::placeholder{
    font-family: 'Roboto', sans-serif;
 }
+
+textarea {
+   resize: none;
+ }
 
 .harry{
    width: 50%;

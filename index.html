@@ -32,30 +32,30 @@
             </div>
 
             <div class="quadro-pergunta">
-                <div class="pergunta-quizz primeira" style="background-color:#434CA0;">
+                <div class="pergunta-quizz pergunta1" style="background-color:#434CA0;">
                     <p data-identifier="question">Em qual animal Olho-Tonto Moody transfigurou Malfoy?</p>
                 </div>
-                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
-                        <img src="./img/image 3.png" alt="imagem opcao 1">
-                        <p>Gatíneo</p>
-                    </div>
-                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
-                        <img src="./img/image 4.png" alt="imagem opcao 2">
-                        <p>Ratata</p>
-                    </div>
-                    
-                    <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
-                        <img src="./img/image 1.png" alt="imagem opcao 3">
-                        <p>Sapo Gordo</p>
-                    </div>
-                    <div class="opcao opcao-correta" data-identifier="answer" onclick="selecionarOpcao(this)">
-                        <img src="./img/image 2.png" alt="imagem opcao 4">
-                        <p>Mustela putorius (Famoso furão)</p>
-                    </div>
+                <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                    <img src="./img/image 3.png" alt="imagem opcao 1">
+                    <p>Gatíneo</p>
+                </div>
+                <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                    <img src="./img/image 4.png" alt="imagem opcao 2">
+                    <p>Ratata</p>
+                </div>
+
+                <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                    <img src="./img/image 1.png" alt="imagem opcao 3">
+                    <p>Sapo Gordo</p>
+                </div>
+                <div class="opcao opcao-correta" data-identifier="answer" onclick="selecionarOpcao(this)">
+                    <img src="./img/image 2.png" alt="imagem opcao 4">
+                    <p>Mustela putorius (Famoso furão)</p>
+                </div>
             </div>
 
             <div class="quadro-pergunta">
-                <div class="pergunta-quizz segunda" style="background-color:#A0438D;">
+                <div class="pergunta-quizz pergunta2" style="background-color:#A0438D;">
                     <p data-identifier="question">Qual dos objetos abaixo NÃO é uma horcrux?</p>
                 </div>
                 <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
@@ -97,63 +97,64 @@
         </div>
 
         <!-- Criação dos quizzez (Tela 3) -->
-        
-        <div class="config hidden criando">
-            <h1 class="comeco">Comece pelo começo</h1>
-            <div class="caixa-perguntas">
-                <form class="form-input">
-                    <input type="text" id='input-informacao' class = "criacao-titulo-do-quiz" placeholder="Título do seu quizz" autocomplete="off">
-                </form>
+        <div class="main-criar">
+            <div class="config hidden criando">
+                <h1 class="comeco">Comece pelo começo</h1>
+                <div class="caixa-perguntas">
+                    <form class="form-input">
+                        <input type="text" id='input-informacao' class="criacao-titulo-do-quiz"
+                            placeholder="Título do seu quizz" autocomplete="off">
+                    </form>
 
-                <form class="form-input">
-                    <input type="text" id='input-informacao' class = "url-imagem-quiz" placeholder="URL da imagem do seu quizz"
-                        autocomplete="off">
-                </form>
+                    <form class="form-input">
+                        <input type="text" id='input-informacao' class="url-imagem-quiz"
+                            placeholder="URL da imagem do seu quizz" autocomplete="off">
+                    </form>
 
-                <form class="form-input">
-                    <input type="text" id='input-informacao' class = "criacao-perguntas-quiz" placeholder="Quantidade de perguntas do quizz"
-                        autocomplete="off">
-                </form>
+                    <form class="form-input">
+                        <input type="text" id='input-informacao' class="criacao-perguntas-quiz"
+                            placeholder="Quantidade de perguntas do quizz" autocomplete="off">
+                    </form>
 
-                <form class="form-input">
-                    <input type="text" id='input-informacao' class = "criacao-niveis-quiz" placeholder="Quantidade de níveis do quizz"
-                        autocomplete="off">
-                </form>
+                    <form class="form-input">
+                        <input type="text" id='input-informacao' class="criacao-niveis-quiz"
+                            placeholder="Quantidade de níveis do quizz" autocomplete="off">
+                    </form>
+                </div>
+
+                <div onclick="prossigaParaPerguntas()" class="botao-prosseguir">
+                    <p class="prosseguir">Prosseguir para criar perguntas</p>
+                </div>
             </div>
 
-            <div onclick = "prossigaParaPerguntas()" class="botao-prosseguir">
-                <p class="prosseguir">Prosseguir para criar perguntas</p>
+            <div class="config hidden perguntando">
+                <h1 class="comeco">Crie suas peguntas</h1>
+
+                <div class="perguntas-aqui-dentro">
+
+                </div>
+
+                <div onclick="prossigaParaNiveis()" class="botao-prosseguir">
+                    <p class="prosseguir">Prosseguir para criar níveis</p>
+                </div>
+            </div>
+
+            <div class="config hidden nivelando">
+                <h1 class="comeco">Agora, decida os níveis</h1>
+
+                <div class="niveis-aqui-dentro">
+
+                </div>
+
+                <div onclick="finalizandoQuiz()" class="botao-prosseguir">
+                    <p class="prosseguir">Finalizar quizz</p>
+                </div>
+            </div>
+
+            <div class="config hidden finalizando">
+
             </div>
         </div>
-
-        <div class="config hidden perguntando">
-            <h1 class="comeco">Crie suas peguntas</h1>
-
-            <div class = "perguntas-aqui-dentro">
-
-            </div>
-
-            <div  onclick = "prossigaParaNiveis()" class="botao-prosseguir">
-                <p class="prosseguir">Prosseguir para criar níveis</p>
-            </div>
-        </div>
-
-        <div class="config hidden nivelando">
-            <h1 class="comeco">Agora, decida os níveis</h1>
-
-            <div class = "niveis-aqui-dentro">
-
-            </div>
-
-            <div onclick = "finalizandoQuiz()" class="botao-prosseguir">
-                <p class="prosseguir" >Finalizar quizz</p>
-            </div>
-        </div>
-
-        <div class="config hidden finalizando">
-            
-        </div>
-    
 
         <!-- Tela Inicial (Tela 1) -->
         <div class="tela-inicial">

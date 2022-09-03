@@ -76,7 +76,6 @@ function prossigaParaNiveis(){
 }
 
 function finalizandoQuiz(){
-
     finalizaQuizz();
     validaTituloQuiz();
     validaURL();
@@ -251,12 +250,6 @@ function alteraURL(){
 
 
 
-
-
-
-
-
-
 function recarregaSite() {
     window.location.reload()
 }
@@ -265,7 +258,7 @@ function recarregaSite() {
 function selecionarOpcao (objeto) {
     console.log(objeto);
     const opcoes = objeto.parentNode;
-
+    
     if (opcoes.classList.contains('respondido')){
         return;
     } else {
@@ -273,9 +266,31 @@ function selecionarOpcao (objeto) {
         opcoes.classList.add('respondido');
     }
 
+    mostrarResposta();
 }
 
+function mostrarResposta () {
+    const indiceResposta = document.querySelectorAll('.respondido')
 
+    if (indiceResposta.length === 2){
+        const resp = document.querySelector('.quadro-resposta');
+        resp.classList.remove('hidden');
+    }
+}
 
+function reiniciarQuizz () {
+    const rmv = document.querySelectorAll('.respondido');
+    const desc = document.querySelectorAll('.selecionado');
+    for (let i = 0; i < desc.length; i++) {
+        desc[i].classList.remove('selecionado');
+        rmv[i].classList.remove('respondido'); 
+    }
+
+    const resp = document.querySelector('.quadro-resposta');
+    resp.classList.add('hidden');
+
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera 
+}
 
 
