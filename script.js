@@ -6,6 +6,9 @@ let imagemQuizz;
 let niveis;
 
 
+
+
+
 function updatePage(){ //Essa função puxa todos os quizzes do servidor
     const promiseQuizzes = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
     promiseQuizzes.then(processPromise);
@@ -91,14 +94,13 @@ function renderizarQuizz(quizzClicado){
     mainqz.innerHTML += `
     <div class="quadro-resposta hidden" data-identifier="quizz-result">
                 <div class="resposta">
-                    <p>88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
+                    <p>88% de acerto: ${tituloNivel}</p>
                 </div>
                 <div class="resultado">
-                    <img src="./img/resultado1.png" alt="imagem opcao 4">
+                    <img src="${imagemNivel}" alt="imagem opcao 4">
                 </div>
                 <div class="texto-resposta">
-                    <p>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão
-                        abaixo para usar o vira-tempo e reiniciar este teste.</p>
+                    <p>${textoNivel}</p>
                 </div>
             </div>
             <div class="reiniciar-quizz" onclick="reiniciarQuizz()">
@@ -111,6 +113,7 @@ function renderizarQuizz(quizzClicado){
 
     selecionarQuizz();
 }
+
 
 function selecionarQuizz() {
     const main = document.querySelector('.tela-inicial');
@@ -156,18 +159,41 @@ function expandeNiveis(fator){
 }
 
 function prossigaParaPerguntas(){
-    criePerguntas();
-    validaNumPgt();
-    validaNumNiv();
-    geraPerguntas()
+    if ((document.querySelector('.criacao-titulo-do-quiz').value.length > 20)  && (document.querySelector('.criacao-titulo-do-quiz').value.length < 65) && (document.querySelector('.criacao-perguntas-quiz').value >= 3) && (document.querySelector('.criacao-niveis-quiz').value >= 2) && (document.querySelector('.url-imagem-quiz').value !== "" )){
+        criePerguntas();
+        validaNumPgt();
+        validaNumNiv();
+        geraPerguntas()  
+    }else {
+        alert("Os dados nao foram preenchidos corretamente");
+        document.querySelector('.criacao-titulo-do-quiz').value = "";
+        document.querySelector('.url-imagem-quiz').value = "";
+        document.querySelector('.criacao-perguntas-quiz').value = "";
+        document.querySelector('.criacao-niveis-quiz').value = "";
+    }
 }
 
+let tituloDoQuiz;
+function validaTituloQuiz(){
+    tituloDoQuiz = document.querySelector('.criacao-titulo-do-quiz').value;
+}
+
+let urlImgQuiz;
+function validaURL(){
+    urlImgQuiz = document.querySelector('.url-imagem-quiz').value;
+}
+
+
 function prossigaParaNiveis(){
+    
+    lendoPerguntas();
     crieNiveis();
     geraNiveis();
 }
 
+
 function finalizandoQuiz(){
+    lendoNiveis();
     finalizaQuizz();
     validaTituloQuiz();
     validaURL();
@@ -218,6 +244,15 @@ function voltaHome(){
     y.classList.remove('hidden')
 }
 
+
+
+
+let objPost = {};
+
+
+
+
+
 function geraPerguntas(){
     for (let i = 0; i < npqn; i++){
         const x = document.querySelector('.perguntas-aqui-dentro');
@@ -230,11 +265,11 @@ function geraPerguntas(){
                 </div>
                 <div class="tampa hidden">
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Texto da pergunta" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c" placeholder="Texto da pergunta" autocomplete="off">
                     </form>
                     <form class="form-input">
                         <p class = "escolha-cor-fundo">Escolha a cor de fundo da pergunta</p>
-                        <input type="color" id='input-informacao' class = "cor-de-fundo-pergunta${i + 1}" placeholder="Cor de fundo da pergunta"
+                        <input type="color" id='input-informacao' class = "c cor-de-fundo-pergunta" placeholder="Cor de fundo da pergunta"
                             autocomplete="off">
                     </form>
                 </div>
@@ -242,38 +277,152 @@ function geraPerguntas(){
                 <div class="tampa hidden">
                     <h1 class="pergunta margin-bottom">Resposta correta</h1>
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c respostacorreta" placeholder="Resposta correta" autocomplete="off">
                     </form>
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c" placeholder="URL da imagem" autocomplete="off">
                     </form>
                 </div>
 
                 <div class="tampa hidden">
                     <h1 class="pergunta margin-bottom">Respostas incorretas</h1>
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Resposta incorreta 1" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c i" placeholder="Resposta incorreta 1" autocomplete="off">
                     </form>
                     <form class="form-input-margin">
-                        <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c i" placeholder="URL da imagem" autocomplete="off">
                     </form>
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Resposta incorreta 2" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c i" placeholder="Resposta incorreta 2" autocomplete="off">
                     </form>
                     <form class="form-input-margin">
-                        <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c i" placeholder="URL da imagem" autocomplete="off">
                     </form>
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Resposta incorreta 3" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c i" placeholder="Resposta incorreta 3" autocomplete="off">
                     </form>
                     <form class="form-input-margin">
-                        <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c i" placeholder="URL da imagem" autocomplete="off">
                     </form>
                 </div>
             </div>
         `
     }
 }
+
+let arrQuestions = [];
+let objRespostaCorreta = {};
+let objRespostaIncorreta1 = {};
+let objRespostaIncorreta2 = {};
+let objRespostaIncorreta3 = {};
+let objResposta = [];
+let respostas = [];
+
+
+function lendoPerguntas(){
+    for(let i = 0; i < npqn; i++){
+        let a = document.querySelector('.c');
+        let av = a.value;
+
+        a.classList.remove('c');
+
+        let b = document.querySelector('.c');
+        let bv = b.value;
+        
+        b.classList.remove('c');
+
+        
+        let c = document.querySelector('.c');
+        let cv = c.value;
+
+        c.classList.remove('c');
+
+        let d = document.querySelector('.c');
+        let dv = d.value;
+
+        d.classList.remove('c');
+
+        objRespostaCorreta = {
+            text: `${cv}`,
+            image: `${dv}`,
+            isCorrectAnswer: true
+        }
+
+        objResposta.push(objRespostaCorreta)
+
+    
+        let e = document.querySelector('.c');
+        let ev = e.value;
+
+
+        e.classList.remove('c');
+
+        let f = document.querySelector('.c');
+        let fv = f.value;
+
+        f.classList.remove('c');
+
+        let g = document.querySelector('.c');
+        let gv = g.value;
+
+        g.classList.remove('c');
+
+        let h = document.querySelector('.c');
+        let hv = h.value;
+
+        h.classList.remove('c');
+
+        let i = document.querySelector('.c');
+        let iv = i.value;
+
+        i.classList.remove('c');
+
+        let j = document.querySelector('.c');
+        let jv = j.value;
+
+        j.classList.remove('c');
+
+        if (ev !== ""){
+            objRespostaIncorreta1 = {
+                text: `${ev}`,
+                image: `${fv}`,
+                isCorrectAnswer: false
+            }
+            objResposta.push(objRespostaIncorreta1)
+        }
+
+        if (gv !== ""){
+            objRespostaIncorreta2 = {
+                text: `${gv}`,
+                image: `${hv}`,
+                isCorrectAnswer: false
+            }
+            objResposta.push(objRespostaIncorreta2)
+        }
+
+        if (iv !== ""){
+            objRespostaIncorreta3 = {
+                text: `${iv}`,
+                image: `${jv}`,
+                isCorrectAnswer: false
+            }
+            objResposta.push(objRespostaIncorreta3)
+        }
+
+        respostas.push(objResposta)
+        
+        arrQuestions = {
+			title:`${av}`,
+			color: `${bv}`,
+			answers: `${respostas}`,
+        }
+
+
+    }
+}
+
+
+
 
 function geraNiveis(){
     for (let i = 0; i < numnivqnum; i++){
@@ -286,18 +435,18 @@ function geraNiveis(){
             </div>
             <div class="tampa hidden">
                 <form class="form-input">
-                    <input type="text" id='input-informacao' placeholder="Título do nível" autocomplete="off">
+                    <input type="text" id='input-informacao' class = "n" placeholder="Título do nível" autocomplete="off">
                 </form>
                 <form class="form-input">
-                    <input type="text" id='input-informacao' placeholder="% de acerto mínima"
+                    <input type="text" id='input-informacao' class = "n" placeholder="% de acerto mínima"
                         autocomplete="off">
                 </form>
                 <form class="form-input">
-                    <input type="text" id='input-informacao' placeholder="URL da imagem do nível"
+                    <input type="text" id='input-informacao' class = "n" placeholder="URL da imagem do nível"
                         autocomplete="off">
                 </form>
                 <form class="form-input">
-                    <textarea id='input-informacao-nivel' rows="4" cols="20" placeholder="Descrição do nível"
+                    <textarea id='input-informacao-nivel' rows="4" cols="20" class = "n" placeholder="Descrição do nível"
                         autocomplete="off"></textarea>
                 </form>
             </div>
@@ -306,16 +455,54 @@ function geraNiveis(){
     }
 }
 
+let arrLevels = [];
 
-let tituloDoQuiz;
-function validaTituloQuiz(){
-    tituloDoQuiz = document.querySelector('.criacao-titulo-do-quiz').value;
+let objLevels = {}; 
+
+
+function lendoNiveis(){
+    
+    for(let i = 0; i < numnivqnum; i++){
+        let a = document.querySelector('.n');
+        let av = a.value;
+        
+
+        a.classList.remove('n');
+        let b = document.querySelector('.n');
+        let bv = b.value;
+        
+
+        b.classList.remove('n');
+        let c = document.querySelector('.n');
+        let cv = c.value;
+        
+
+        c.classList.remove('n');
+        let d = document.querySelector('.n');
+        let dv = d.value;
+        
+
+        d.classList.remove('n');
+
+        
+        objLevels = {
+            title: `${av}`,
+            image: `${cv}`,
+            text:  `${dv}`,
+            minValue: `${bv}`
+        };
+
+        arrLevels.push(objLevels);
+
+
+        
+    }
+
+    
 }
 
-let urlImgQuiz;
-function validaURL(){
-    urlImgQuiz = document.querySelector('.url-imagem-quiz').value;
-}
+
+
 
 
 function geraTelaFinal(){
@@ -384,5 +571,4 @@ function reiniciarQuizz () {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera 
 }
-
 
