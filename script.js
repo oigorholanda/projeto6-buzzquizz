@@ -613,7 +613,7 @@ function reiniciarQuizz() {
 function armazenarQuizzes(objPost){
     const dadosSerializados = JSON.stringify(objPost);
     for(let i = 0; i < allQuizzes.length; i++){
-        localStorage.setItem(quizzUsuario${i}, dadosSerializados);
+        localStorage.setItem(`quizzUsuario${i}`, dadosSerializados);
     }
 }
 
@@ -622,18 +622,16 @@ let dadosSerializados;
 function renderizarQuizzesUsuario(){
     const yourquizzes = document.querySelector('.your-quizzes');
     for(let i = 0; i < allQuizzes.length; i++){
-        const quizzSerializado = localStorage.getItem(quizzUsuario${i}, dadosSerializados);
+        const quizzSerializado = localStorage.getItem(`quizzUsuario${i}`, dadosSerializados);
         const quizzDeserializado = JSON.parse(quizzSerializado);
 
         if(quizzDeserializado.id === allQuizzes[i].id){
-            yourquizzes.innerHTML += 
+            yourquizzes.innerHTML += `
             <div class="quizz" id="${quizzDeserializado.id}" data-identifier="quizz-card" onclick="renderizarQuizz(this)">
                         <img src="${quizzDeserializado.image}" />
                         <p>"${quizzDeserializado.title}"</p>
             </div>
-            
-
+            `
         }
-    }
-
+    }   
 }
