@@ -192,7 +192,6 @@ function validaURL(){
 
 
 function prossigaParaNiveis(){
-    
     lendoPerguntas();
     crieNiveis();
     geraNiveis();
@@ -525,6 +524,7 @@ function limpaEspacos(){
     document.querySelector('.niveis-aqui-dentro').innerHTML = "";
     document.querySelector('.finalizando').innerHTML = "";
 }
+
 
 
 function geraTelaFinal(){
