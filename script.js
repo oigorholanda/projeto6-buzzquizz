@@ -4,7 +4,9 @@ let qtdPergunta;
 let perguntas = [];
 let imagemQuizz;
 let niveis;
-
+let tituloNivel;
+let textoNivel;
+let imagemNivel;
 
 
 
@@ -51,6 +53,9 @@ function renderizarQuizz(quizzClicado){
             perguntas = allQuizzes[i].questions;
             tituloQuizz = allQuizzes[i].title;
             qtdPergunta = allQuizzes[i].questions.length;
+            tituloNivel = niveis[i].title;
+            textoNivel = niveis[i].text;
+            imagemNivel = niveis[i].image;
             console.log(allQuizzes[i]);
         }
     }
