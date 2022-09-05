@@ -57,6 +57,9 @@ function renderizarQuizz(quizzClicado){
             textoNivel = niveis[i].text;
             imagemNivel = niveis[i].image;
             qtdPergunta = allQuizzes[i].questions.length;
+            tituloNivel = niveis[i].title;
+            textoNivel = niveis[i].text;
+            imagemNivel = niveis[i].image;
             console.log(allQuizzes[i]);
         }
     }
