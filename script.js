@@ -10,58 +10,52 @@ let imagemNivel;
 
 
 
-function updatePage(){ //Essa função puxa todos os quizzes do servidor
+function updatePage() { //Essa função puxa todos os quizzes do servidor
     const promiseQuizzes = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
     promiseQuizzes.then(processPromise);
 }
 updatePage();
 
-function processPromise(promiseQuizzes){ //Essa função mostra a promise no console
+function processPromise(promiseQuizzes) { //Essa função mostra a promise no console
     allQuizzes = promiseQuizzes.data;
     console.log(allQuizzes);
-    
-    
+
+
     renderizar();
 }
 
 
-function renderizar(){
+function renderizar() {
     const quizzes = document.querySelector(".quizzes");
     quizzes.innerHTML = '';
     for (let i = 0; i < allQuizzes.length; i++) {
-            quizzes.innerHTML += `
+        quizzes.innerHTML += `
             <div class="quizz" id="${allQuizzes[i].id}" data-identifier="quizz-card" onclick="renderizarQuizz(this)">
                         <img src="${allQuizzes[i].image}" />
                         <p>${allQuizzes[i].title}</p>
                     </div>
             `
-        }
+    }
 }
- 
-function renderizarQuizz(quizzClicado){
+
+function renderizarQuizz(quizzClicado) {
     console.log(quizzClicado);
     const seletor = Number(quizzClicado.id);
 
     const mainqz = document.querySelector(".main-quizz");
     mainqz.innerHTML = '';
-    
-    for(let i = 0; i < allQuizzes.length; i++){
+
+    for (let i = 0; i < allQuizzes.length; i++) {
         if (seletor === allQuizzes[i].id) {
             imagemQuizz = allQuizzes[i].image;
             niveis = allQuizzes[i].levels;
             perguntas = allQuizzes[i].questions;
             tituloQuizz = allQuizzes[i].title;
-            tituloNivel = niveis[i].title;
-            textoNivel = niveis[i].text;
-            imagemNivel = niveis[i].image;
             qtdPergunta = allQuizzes[i].questions.length;
-            tituloNivel = niveis[i].title;
-            textoNivel = niveis[i].text;
-            imagemNivel = niveis[i].image;
             console.log(allQuizzes[i]);
         }
     }
-    
+
     console.log(perguntas);
     mainqz.innerHTML = `
     <div class="titulo-quizz">
@@ -71,7 +65,7 @@ function renderizarQuizz(quizzClicado){
     `
     for (let i = 0; i < qtdPergunta; i++) {
         mainqz.innerHTML +=
-        `
+            `
         <div class="quadro-pergunta">
             <div class="pergunta-quizz pergunta${i}" style="background-color:${perguntas[i].color};">
                 <p data-identifier="question">${perguntas[i].title}</p>
@@ -98,26 +92,34 @@ function renderizarQuizz(quizzClicado){
         //   `
     }
 
-    mainqz.innerHTML += `
-    <div class="quadro-resposta hidden" data-identifier="quizz-result">
-                <div class="resposta">
-                    <p>88% de acerto: ${tituloNivel}</p>
-                </div>
-                <div class="resultado">
-                    <img src="${imagemNivel}" alt="imagem opcao 4">
-                </div>
-                <div class="texto-resposta">
-                    <p>${textoNivel}</p>
-                </div>
-            </div>
-            <div class="reiniciar-quizz" onclick="reiniciarQuizz()">
-                Reiniciar Quizz
-            </div>
-            <div class="voltar" onclick="voltarPrincipal()">
-                Voltar pra home
-            </div>
-            `
+    for (let i = 0; i < niveis.length; i++) {
+        tituloNivel = niveis[i].title;
+        textoNivel = niveis[i].text;
+        imagemNivel = niveis[i].image;
 
+        mainqz.innerHTML += `
+        <div class="quadro-resposta hidden" data-identifier="quizz-result">
+                    <div class="resposta">
+                        <p>88% de acerto: ${tituloNivel}</p>
+                    </div>
+                    <div class="resultado">
+                        <img src="${imagemNivel}" alt="imagem opcao 4">
+                    </div>
+                    <div class="texto-resposta">
+                        <p>${textoNivel}</p>
+                    </div>
+                </div>
+                `
+    }
+
+    mainqz.innerHTML += `                 
+    <div class="reiniciar-quizz" onclick="reiniciarQuizz()">
+    Reiniciar Quizz
+    </div>
+    <div class="voltar" onclick="voltarPrincipal()">
+    Voltar pra home
+    </div>
+    `
     selecionarQuizz();
 }
 
@@ -147,7 +149,7 @@ function voltarPrincipal() {
 }
 
 
-function expandePerguntas(fator){
+function expandePerguntas(fator) {
     let x = fator.parentNode;
     let y = x.parentNode;
     const tampa1 = y.children[1]
@@ -158,20 +160,20 @@ function expandePerguntas(fator){
     tampa3.classList.toggle('hidden')
 }
 
-function expandeNiveis(fator){
+function expandeNiveis(fator) {
     let x = fator.parentNode;
     let y = x.parentNode;
     const tampa1 = y.children[1]
     tampa1.classList.toggle('hidden')
 }
 
-function prossigaParaPerguntas(){
-    if ((document.querySelector('.criacao-titulo-do-quiz').value.length > 20)  && (document.querySelector('.criacao-titulo-do-quiz').value.length < 65) && (document.querySelector('.criacao-perguntas-quiz').value >= 3) && (document.querySelector('.criacao-niveis-quiz').value >= 2) && (document.querySelector('.url-imagem-quiz').value !== "" )){
+function prossigaParaPerguntas() {
+    if ((document.querySelector('.criacao-titulo-do-quiz').value.length > 20) && (document.querySelector('.criacao-titulo-do-quiz').value.length < 65) && (document.querySelector('.criacao-perguntas-quiz').value >= 3) && (document.querySelector('.criacao-niveis-quiz').value >= 2) && (document.querySelector('.url-imagem-quiz').value !== "")) {
         criePerguntas();
         validaNumPgt();
         validaNumNiv();
-        geraPerguntas()  
-    }else {
+        geraPerguntas()
+    } else {
         alert("Os dados nao foram preenchidos corretamente");
         document.querySelector('.criacao-titulo-do-quiz').value = "";
         document.querySelector('.url-imagem-quiz').value = "";
@@ -181,24 +183,24 @@ function prossigaParaPerguntas(){
 }
 
 let tituloDoQuiz;
-function validaTituloQuiz(){
+function validaTituloQuiz() {
     tituloDoQuiz = document.querySelector('.criacao-titulo-do-quiz').value;
 }
 
 let urlImgQuiz;
-function validaURL(){
+function validaURL() {
     urlImgQuiz = document.querySelector('.url-imagem-quiz').value;
 }
 
 
-function prossigaParaNiveis(){
+function prossigaParaNiveis() {
     lendoPerguntas();
     crieNiveis();
     geraNiveis();
 }
 
 
-function finalizandoQuiz(){
+function finalizandoQuiz() {
     lendoNiveis();
     finalizaQuizz();
     validaTituloQuiz();
@@ -206,10 +208,10 @@ function finalizandoQuiz(){
     geraTelaFinal();
     alteraURL();
     geraPostQuiz()
-    
+
 }
 
-function criePerguntas(){
+function criePerguntas() {
     const x = document.querySelector('.criando');
     x.classList.add('hidden');
     const y = document.querySelector('.perguntando');
@@ -218,33 +220,33 @@ function criePerguntas(){
 
 let npq;
 let npqn;
-function validaNumPgt(){
+function validaNumPgt() {
     npq = document.querySelector('.criacao-perguntas-quiz').value;
     npqn = Number(npq);
 }
 
 let numnivq;
 let numnivqnum;
-function validaNumNiv(){
+function validaNumNiv() {
     numnivq = document.querySelector('.criacao-niveis-quiz').value;
     numnivqnum = Number(numnivq);
 }
 
-function crieNiveis(){
+function crieNiveis() {
     const x = document.querySelector('.perguntando');
     x.classList.add('hidden');
     const y = document.querySelector('.nivelando');
     y.classList.remove('hidden')
 }
 
-function finalizaQuizz(){
+function finalizaQuizz() {
     const x = document.querySelector('.nivelando');
     x.classList.add('hidden');
     const y = document.querySelector('.finalizando');
     y.classList.remove('hidden')
 }
 
-function voltaHome(){
+function voltaHome() {
     limpaEspacos()
     const x = document.querySelector('.finalizando');
     x.classList.add('hidden');
@@ -257,8 +259,8 @@ function voltaHome(){
 let objPost = {};
 
 
-function geraPerguntas(){
-    for (let i = 0; i < npqn; i++){
+function geraPerguntas() {
+    for (let i = 0; i < npqn; i++) {
         const x = document.querySelector('.perguntas-aqui-dentro');
         x.innerHTML += `
         <div class="caixa-perguntas">
@@ -321,8 +323,8 @@ let objResposta = [];
 let respostas = [];
 
 
-function lendoPerguntas(){
-    for(let i = 0; i < npqn; i++){
+function lendoPerguntas() {
+    for (let i = 0; i < npqn; i++) {
         let txtDaPergunta = document.querySelector('.c');
         let txtDaPerguntaValue = txtDaPergunta.value;
 
@@ -330,10 +332,10 @@ function lendoPerguntas(){
 
         let corFundoPergunta = document.querySelector('.c');
         let corFundoPerguntaValue = corFundoPergunta.value;
-        
+
         corFundoPergunta.classList.remove('c');
 
-        
+
         let respostaCorreta = document.querySelector('.c');
         let respostaCorretaValue = respostaCorreta.value;
 
@@ -352,7 +354,7 @@ function lendoPerguntas(){
 
         respostas.push(objRespostaCorreta)
 
-    
+
         let respostaIncorreta1 = document.querySelector('.c');
         let respostaIncorreta1Value = respostaIncorreta1.value;
 
@@ -365,7 +367,7 @@ function lendoPerguntas(){
         URLincorreta1.classList.remove('c');
 
         let respostaIncorreta2 = document.querySelector('.c');
-        let respostaIncorreta2Value= respostaIncorreta2.value;
+        let respostaIncorreta2Value = respostaIncorreta2.value;
 
         respostaIncorreta2.classList.remove('c');
 
@@ -384,7 +386,7 @@ function lendoPerguntas(){
 
         URLincorreta3.classList.remove('c');
 
-        if (respostaIncorreta1Value !== ""){
+        if (respostaIncorreta1Value !== "") {
             objRespostaIncorreta1 = {
                 text: `${respostaIncorreta1Value}`,
                 image: `${URLincorreta1Value}`,
@@ -393,7 +395,7 @@ function lendoPerguntas(){
             respostas.push(objRespostaIncorreta1)
         }
 
-        if (respostaIncorreta2Value !== ""){
+        if (respostaIncorreta2Value !== "") {
             objRespostaIncorreta2 = {
                 text: `${respostaIncorreta2Value}`,
                 image: `${URLincorreta2Value}`,
@@ -402,7 +404,7 @@ function lendoPerguntas(){
             respostas.push(objRespostaIncorreta2)
         }
 
-        if (respostaIncorreta3Value !== ""){
+        if (respostaIncorreta3Value !== "") {
             objRespostaIncorreta3 = {
                 text: `${respostaIncorreta3Value}`,
                 image: `${URLincorreta3Value}`,
@@ -414,7 +416,7 @@ function lendoPerguntas(){
         console.log(respostas);
 
         grupoPergunta = {
-            title:`${txtDaPerguntaValue}`,
+            title: `${txtDaPerguntaValue}`,
             color: `${corFundoPerguntaValue}`,
             answers: respostas,
         };
@@ -429,8 +431,8 @@ function lendoPerguntas(){
 }
 
 
-function geraNiveis(){
-    for (let i = 0; i < numnivqnum; i++){
+function geraNiveis() {
+    for (let i = 0; i < numnivqnum; i++) {
         const x = document.querySelector('.niveis-aqui-dentro');
         x.innerHTML += `
         <div class="caixa-perguntas">
@@ -462,50 +464,50 @@ function geraNiveis(){
 
 let arrLevels = [];
 
-let objLevels = {}; 
+let objLevels = {};
 
 
-function lendoNiveis(){
-    
-    for(let i = 0; i < numnivqnum; i++){
+function lendoNiveis() {
+
+    for (let i = 0; i < numnivqnum; i++) {
         let a = document.querySelector('.n');
         let av = a.value;
-        
+
 
         a.classList.remove('n');
         let b = document.querySelector('.n');
         let bv = b.value;
-        
+
 
         b.classList.remove('n');
         let c = document.querySelector('.n');
         let cv = c.value;
-        
+
 
         c.classList.remove('n');
         let d = document.querySelector('.n');
         let dv = d.value;
-        
+
 
         d.classList.remove('n');
 
-        
+
         objLevels = {
             title: `${av}`,
             image: `${cv}`,
-            text:  `${dv}`,
+            text: `${dv}`,
             minValue: `${bv}`
         };
 
         arrLevels.push(objLevels);
 
 
-        
+
     }
 
 }
 
-function geraPostQuiz(){
+function geraPostQuiz() {
     objPost = {
         title: `${tituloDoQuiz}`,
         image: `${urlImgQuiz}`,
@@ -515,7 +517,7 @@ function geraPostQuiz(){
     axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', objPost)
 }
 
-function limpaEspacos(){
+function limpaEspacos() {
     document.querySelector('.criacao-titulo-do-quiz').value = "";
     document.querySelector('.url-imagem-quiz').value = "";
     document.querySelector('.criacao-perguntas-quiz').value = "";
@@ -527,8 +529,8 @@ function limpaEspacos(){
 
 
 
-function geraTelaFinal(){
-    
+function geraTelaFinal() {
+
     let x = document.querySelector('.finalizando');
 
     x.innerHTML = `
@@ -544,7 +546,7 @@ function geraTelaFinal(){
     `
 }
 
-function alteraURL(){
+function alteraURL() {
     const x = document.querySelector('.caixa-img-final');
     x.style.background = `linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url("${urlImgQuiz}") no-repeat top center`
 }
@@ -555,11 +557,11 @@ function recarregaSite() {
 }
 
 
-function selecionarOpcao (objeto) {
+function selecionarOpcao(objeto) {
     console.log(objeto);
     const opcoes = objeto.parentNode;
-    
-    if (opcoes.classList.contains('respondido')){
+
+    if (opcoes.classList.contains('respondido')) {
         return;
     } else {
         objeto.classList.add('selecionado');
@@ -569,21 +571,21 @@ function selecionarOpcao (objeto) {
     mostrarResposta();
 }
 
-function mostrarResposta () {
+function mostrarResposta() {
     const indiceResposta = document.querySelectorAll('.respondido')
 
-    if (indiceResposta.length === 3){
+    if (indiceResposta.length === 3) {
         const qdresp = document.querySelector('.quadro-resposta');
         qdresp.classList.remove('hidden');
     }
 }
 
-function reiniciarQuizz () {
+function reiniciarQuizz() {
     const resp = document.querySelectorAll('.respondido');
     const selec = document.querySelectorAll('.selecionado');
     for (let i = 0; i < selec.length; i++) {
         selec[i].classList.remove('selecionado');
-        resp[i].classList.remove('respondido'); 
+        resp[i].classList.remove('respondido');
     }
 
     const qresp = document.querySelector('.quadro-resposta');
