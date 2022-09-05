@@ -7,6 +7,7 @@ let niveis;
 let tituloNivel;
 let textoNivel;
 let imagemNivel;
+let opcoesRespostas;
 
 
 
@@ -20,21 +21,19 @@ function processPromise(promiseQuizzes) { //Essa função mostra a promise no co
     allQuizzes = promiseQuizzes.data;
     console.log(allQuizzes);
 
-
     renderizar();
 }
-
 
 function renderizar() {
     const quizzes = document.querySelector(".quizzes");
     quizzes.innerHTML = '';
     for (let i = 0; i < allQuizzes.length; i++) {
         quizzes.innerHTML += `
-            <div class="quizz" id="${allQuizzes[i].id}" data-identifier="quizz-card" onclick="renderizarQuizz(this)">
-                        <img src="${allQuizzes[i].image}" />
-                        <p>${allQuizzes[i].title}</p>
-                    </div>
-            `
+        <div class="quizz" id="${allQuizzes[i].id}" data-identifier="quizz-card" onclick="renderizarQuizz(this)">
+        <img src="${allQuizzes[i].image}" />
+        <p>${allQuizzes[i].title}</p>
+        </div>
+        `
     }
 }
 
@@ -42,8 +41,8 @@ function renderizarQuizz(quizzClicado) {
     console.log(quizzClicado);
     const seletor = Number(quizzClicado.id);
 
-    const mainqz = document.querySelector(".main-quizz");
-    mainqz.innerHTML = '';
+    const ttqz = document.querySelector(".titulo-quizz");
+    ttqz.innerHTML = '';
 
     for (let i = 0; i < allQuizzes.length; i++) {
         if (seletor === allQuizzes[i].id) {
@@ -57,62 +56,70 @@ function renderizarQuizz(quizzClicado) {
     }
 
     console.log(perguntas);
-    mainqz.innerHTML = `
-    <div class="titulo-quizz">
-    <img src="${imagemQuizz}" alt="Castelo">
+    ttqz.innerHTML += `
+    <img src="${imagemQuizz}">
     <p>${tituloQuizz}</p>
     </div>
     `
+    const qdPerg = document.querySelector(".perguntas-quizz");
+    qdPerg.innerHTML = '';
+    console.log(qdPerg);
+
+
     for (let i = 0; i < qtdPergunta; i++) {
-        mainqz.innerHTML +=
-            `
+        opcoesRespostas = perguntas[i].answers;
+        qdPerg.innerHTML +=`
         <div class="quadro-pergunta">
             <div class="pergunta-quizz pergunta${i}" style="background-color:${perguntas[i].color};">
-                <p data-identifier="question">${perguntas[i].title}</p>
+            <p data-identifier="question">${perguntas[i].title}</p>
             </div>
+        `
+        for (let j = 0; j < opcoesRespostas.length; j++) {            
+            if (opcoesRespostas[j].isCorrectAnswer) {
+            qdPerg.innerHTML +=`
             <div class="opcao opcao-correta" data-identifier="answer" onclick="selecionarOpcao(this)">
-                <img src=${perguntas[i].answers[0].image} alt="imagem opcao 1">
-                <p>${perguntas[i].answers[0].text}</p>
-            </div>
-            <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
-                <img src=${perguntas[i].answers[1].image} alt="imagem opcao 2">
-                <p>${perguntas[i].answers[1].text}</p>
+                <img src=${perguntas[i].answers[j].image} alt="imagem opcao 1">
+                <p>${perguntas[i].answers[j].text}</p>
             </div>
             `
-
-        //     <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
-        //         <img src="${perguntas[i].answers[2].image}" alt="imagem opcao 3">
-        //         <p>${perguntas[i].answers[2].text}</p>
-        //     </div>
-        //     <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
-        //         <img src="${perguntas[i].answers[3].image}" alt="imagem opcao 4">
-        //         <p${perguntas[i].answers[3].text}</p>
-        //     </div>
-        // </div>
-        //   `
+            } else {
+            qdPerg.innerHTML +=`
+            <div class="opcao opcao-errada" data-identifier="answer" onclick="selecionarOpcao(this)">
+                <img src=${perguntas[i].answers[j].image} alt="imagem opcao 2">
+                <p>${perguntas[i].answers[j].text}</p>
+            </div>
+            `    
+            }
+        }
     }
+
+    const qdResp = document.querySelector(".quadro-resposta");
+    qdResp.innerHTML = '';
 
     for (let i = 0; i < niveis.length; i++) {
         tituloNivel = niveis[i].title;
         textoNivel = niveis[i].text;
         imagemNivel = niveis[i].image;
 
-        mainqz.innerHTML += `
-        <div class="quadro-resposta hidden" data-identifier="quizz-result">
-                    <div class="resposta">
-                        <p>88% de acerto: ${tituloNivel}</p>
-                    </div>
-                    <div class="resultado">
-                        <img src="${imagemNivel}" alt="imagem opcao 4">
-                    </div>
-                    <div class="texto-resposta">
-                        <p>${textoNivel}</p>
-                    </div>
+        qdResp.innerHTML += `
+            <div class="quadro-resposta hidden" data-identifier="quizz-result">
+                <div class="resposta">
+                    <p>88% de acerto: ${tituloNivel}</p>
                 </div>
-                `
+                <div class="resultado">
+                    <img src="${imagemNivel}" alt="imagem opcao 4">
+                </div>
+                <div class="texto-resposta">
+                    <p>${textoNivel}</p>
+                </div>
+            </div>
+            `
     }
 
-    mainqz.innerHTML += `                 
+    const qdbt = document.querySelector(".botoes");
+    qdbt.innerHTML = '';
+
+    qdbt.innerHTML += `                 
     <div class="reiniciar-quizz" onclick="reiniciarQuizz()">
     Reiniciar Quizz
     </div>
@@ -202,13 +209,16 @@ function prossigaParaNiveis() {
 
 function finalizandoQuiz() {
     lendoNiveis();
-    finalizaQuizz();
-    validaTituloQuiz();
-    validaURL();
-    geraTelaFinal();
-    alteraURL();
-    geraPostQuiz()
-
+    if(minimoZero >= 1){
+        finalizaQuizz();
+        validaTituloQuiz();
+        validaURL();
+        geraTelaFinal();
+        alteraURL();
+        geraPostQuiz()
+    }else{
+        alert("Pelo menos um nível deve ter percentagem de acerto igual a zero")
+    }
 }
 
 function criePerguntas() {
@@ -466,6 +476,7 @@ let arrLevels = [];
 
 let objLevels = {};
 
+let minimoZero = 0;
 
 function lendoNiveis() {
 
@@ -477,6 +488,9 @@ function lendoNiveis() {
         a.classList.remove('n');
         let b = document.querySelector('.n');
         let bv = b.value;
+        if (bv === 0){
+            minimoZero += 1;
+        }
 
 
         b.classList.remove('n');
@@ -515,6 +529,7 @@ function geraPostQuiz() {
         levels: arrLevels
     }
     axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', objPost)
+    armazenarQuizzes(objPost);
 }
 
 function limpaEspacos() {
@@ -593,4 +608,32 @@ function reiniciarQuizz() {
 
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera 
+}
+
+function armazenarQuizzes(objPost){
+    const dadosSerializados = JSON.stringify(objPost);
+    for(let i = 0; i < allQuizzes.length; i++){
+        localStorage.setItem(quizzUsuario${i}, dadosSerializados);
+    }
+}
+
+let dadosSerializados;
+
+function renderizarQuizzesUsuario(){
+    const yourquizzes = document.querySelector('.your-quizzes');
+    for(let i = 0; i < allQuizzes.length; i++){
+        const quizzSerializado = localStorage.getItem(quizzUsuario${i}, dadosSerializados);
+        const quizzDeserializado = JSON.parse(quizzSerializado);
+
+        if(quizzDeserializado.id === allQuizzes[i].id){
+            yourquizzes.innerHTML += 
+            <div class="quizz" id="${quizzDeserializado.id}" data-identifier="quizz-card" onclick="renderizarQuizz(this)">
+                        <img src="${quizzDeserializado.image}" />
+                        <p>"${quizzDeserializado.title}"</p>
+            </div>
+            
+
+        }
+    }
+
 }

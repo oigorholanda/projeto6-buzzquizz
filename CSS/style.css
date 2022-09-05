@@ -222,6 +222,13 @@ main {
    z-index: 2;
 }
 
+.perguntas-quizz {
+   width: 50vw;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
 .quadro-pergunta {
    display: grid;
    grid-template-columns:30vw 30vw;
@@ -242,7 +249,6 @@ main {
    align-items: center;
    padding: 10px;
 }
-
 
 .opcao {
    font-size: 20px;
@@ -302,6 +308,13 @@ main {
 .texto-resposta {
    font-weight: 700;
    padding: 5px;
+}
+
+.botoes {
+   width: 50vw;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
 }
 
 .reiniciar-quizz {
