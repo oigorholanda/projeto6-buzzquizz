@@ -4,6 +4,10 @@ let qtdPergunta;
 let perguntas = [];
 let imagemQuizz;
 let niveis;
+let tituloNivel;
+let textoNivel;
+let imagemNivel;
+
 
 
 function updatePage(){ //Essa função puxa todos os quizzes do servidor
@@ -47,7 +51,13 @@ function renderizarQuizz(quizzClicado){
             niveis = allQuizzes[i].levels;
             perguntas = allQuizzes[i].questions;
             tituloQuizz = allQuizzes[i].title;
+            tituloNivel = niveis[i].title;
+            textoNivel = niveis[i].text;
+            imagemNivel = niveis[i].image;
             qtdPergunta = allQuizzes[i].questions.length;
+            tituloNivel = niveis[i].title;
+            textoNivel = niveis[i].text;
+            imagemNivel = niveis[i].image;
             console.log(allQuizzes[i]);
         }
     }
@@ -91,14 +101,13 @@ function renderizarQuizz(quizzClicado){
     mainqz.innerHTML += `
     <div class="quadro-resposta hidden" data-identifier="quizz-result">
                 <div class="resposta">
-                    <p>88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
+                    <p>88% de acerto: ${tituloNivel}</p>
                 </div>
                 <div class="resultado">
-                    <img src="./img/resultado1.png" alt="imagem opcao 4">
+                    <img src="${imagemNivel}" alt="imagem opcao 4">
                 </div>
                 <div class="texto-resposta">
-                    <p>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão
-                        abaixo para usar o vira-tempo e reiniciar este teste.</p>
+                    <p>${textoNivel}</p>
                 </div>
             </div>
             <div class="reiniciar-quizz" onclick="reiniciarQuizz()">
@@ -111,6 +120,7 @@ function renderizarQuizz(quizzClicado){
 
     selecionarQuizz();
 }
+
 
 function selecionarQuizz() {
     const main = document.querySelector('.tela-inicial');
@@ -156,23 +166,47 @@ function expandeNiveis(fator){
 }
 
 function prossigaParaPerguntas(){
-    criePerguntas();
-    validaNumPgt();
-    validaNumNiv();
-    geraPerguntas()
+    if ((document.querySelector('.criacao-titulo-do-quiz').value.length > 20)  && (document.querySelector('.criacao-titulo-do-quiz').value.length < 65) && (document.querySelector('.criacao-perguntas-quiz').value >= 3) && (document.querySelector('.criacao-niveis-quiz').value >= 2) && (document.querySelector('.url-imagem-quiz').value !== "" )){
+        criePerguntas();
+        validaNumPgt();
+        validaNumNiv();
+        geraPerguntas()  
+    }else {
+        alert("Os dados nao foram preenchidos corretamente");
+        document.querySelector('.criacao-titulo-do-quiz').value = "";
+        document.querySelector('.url-imagem-quiz').value = "";
+        document.querySelector('.criacao-perguntas-quiz').value = "";
+        document.querySelector('.criacao-niveis-quiz').value = "";
+    }
 }
 
+let tituloDoQuiz;
+function validaTituloQuiz(){
+    tituloDoQuiz = document.querySelector('.criacao-titulo-do-quiz').value;
+}
+
+let urlImgQuiz;
+function validaURL(){
+    urlImgQuiz = document.querySelector('.url-imagem-quiz').value;
+}
+
+
 function prossigaParaNiveis(){
+    
+    lendoPerguntas();
     crieNiveis();
     geraNiveis();
 }
 
+
 function finalizandoQuiz(){
+    lendoNiveis();
     finalizaQuizz();
     validaTituloQuiz();
     validaURL();
     geraTelaFinal();
-    alteraURL()
+    alteraURL();
+    geraPostQuiz()
     
 }
 
@@ -212,68 +246,189 @@ function finalizaQuizz(){
 }
 
 function voltaHome(){
+    limpaEspacos()
     const x = document.querySelector('.finalizando');
     x.classList.add('hidden');
     const y = document.querySelector('.tela-inicial');
     y.classList.remove('hidden')
 }
 
+
+
+let objPost = {};
+
+
 function geraPerguntas(){
     for (let i = 0; i < npqn; i++){
         const x = document.querySelector('.perguntas-aqui-dentro');
         x.innerHTML += `
         <div class="caixa-perguntas">
-
                 <div class="engloba-pergunta">
                     <h1 class="pergunta margin-bottom primeirapergunta">Pergunta ${i + 1}</h1>
                     <img onclick="expandePerguntas(this)" class="vector" src="./img/Vector (1).png">
                 </div>
                 <div class="tampa hidden">
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Texto da pergunta" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c" placeholder="Texto da pergunta" autocomplete="off">
                     </form>
                     <form class="form-input">
                         <p class = "escolha-cor-fundo">Escolha a cor de fundo da pergunta</p>
-                        <input type="color" id='input-informacao' class = "cor-de-fundo-pergunta${i + 1}" placeholder="Cor de fundo da pergunta"
+                        <input type="color" id='input-informacao' class = "c cor-de-fundo-pergunta" placeholder="Cor de fundo da pergunta"
                             autocomplete="off">
                     </form>
                 </div>
-
                 <div class="tampa hidden">
                     <h1 class="pergunta margin-bottom">Resposta correta</h1>
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Resposta correta" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c respostacorreta" placeholder="Resposta correta" autocomplete="off">
                     </form>
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c" placeholder="URL da imagem" autocomplete="off">
                     </form>
                 </div>
-
                 <div class="tampa hidden">
                     <h1 class="pergunta margin-bottom">Respostas incorretas</h1>
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Resposta incorreta 1" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c i" placeholder="Resposta incorreta 1" autocomplete="off">
                     </form>
                     <form class="form-input-margin">
-                        <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c i" placeholder="URL da imagem" autocomplete="off">
                     </form>
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Resposta incorreta 2" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c i" placeholder="Resposta incorreta 2" autocomplete="off">
                     </form>
                     <form class="form-input-margin">
-                        <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c i" placeholder="URL da imagem" autocomplete="off">
                     </form>
                     <form class="form-input">
-                        <input type="text" id='input-informacao' placeholder="Resposta incorreta 3" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c i" placeholder="Resposta incorreta 3" autocomplete="off">
                     </form>
                     <form class="form-input-margin">
-                        <input type="text" id='input-informacao' placeholder="URL da imagem" autocomplete="off">
+                        <input type="text" id='input-informacao' class = "c i" placeholder="URL da imagem" autocomplete="off">
                     </form>
                 </div>
             </div>
         `
     }
 }
+
+let arrQuestions = [];
+let grupoPergunta = {};
+let objRespostaCorreta = {};
+let objRespostaIncorreta1;
+let objRespostaIncorreta2;
+let objRespostaIncorreta3;
+let objResposta = [];
+let respostas = [];
+
+
+function lendoPerguntas(){
+    for(let i = 0; i < npqn; i++){
+        let txtDaPergunta = document.querySelector('.c');
+        let txtDaPerguntaValue = txtDaPergunta.value;
+
+        txtDaPergunta.classList.remove('c');
+
+        let corFundoPergunta = document.querySelector('.c');
+        let corFundoPerguntaValue = corFundoPergunta.value;
+        
+        corFundoPergunta.classList.remove('c');
+
+        
+        let respostaCorreta = document.querySelector('.c');
+        let respostaCorretaValue = respostaCorreta.value;
+
+        respostaCorreta.classList.remove('c');
+
+        let URLrespostaCorrreta = document.querySelector('.c');
+        let URLrespostaCorrretaValue = URLrespostaCorrreta.value;
+
+        URLrespostaCorrreta.classList.remove('c');
+
+        objRespostaCorreta = {
+            text: `${respostaCorretaValue}`,
+            image: `${URLrespostaCorrretaValue}`,
+            isCorrectAnswer: true
+        }
+
+        respostas.push(objRespostaCorreta)
+
+    
+        let respostaIncorreta1 = document.querySelector('.c');
+        let respostaIncorreta1Value = respostaIncorreta1.value;
+
+
+        respostaIncorreta1.classList.remove('c');
+
+        let URLincorreta1 = document.querySelector('.c');
+        let URLincorreta1Value = URLincorreta1.value;
+
+        URLincorreta1.classList.remove('c');
+
+        let respostaIncorreta2 = document.querySelector('.c');
+        let respostaIncorreta2Value= respostaIncorreta2.value;
+
+        respostaIncorreta2.classList.remove('c');
+
+        let URLincorreta2 = document.querySelector('.c');
+        let URLincorreta2Value = URLincorreta2.value;
+
+        URLincorreta2.classList.remove('c');
+
+        let respostaIncorreta3 = document.querySelector('.c');
+        let respostaIncorreta3Value = respostaIncorreta3.value;
+
+        respostaIncorreta3.classList.remove('c');
+
+        let URLincorreta3 = document.querySelector('.c');
+        let URLincorreta3Value = URLincorreta3.value;
+
+        URLincorreta3.classList.remove('c');
+
+        if (respostaIncorreta1Value !== ""){
+            objRespostaIncorreta1 = {
+                text: `${respostaIncorreta1Value}`,
+                image: `${URLincorreta1Value}`,
+                isCorrectAnswer: false
+            }
+            respostas.push(objRespostaIncorreta1)
+        }
+
+        if (respostaIncorreta2Value !== ""){
+            objRespostaIncorreta2 = {
+                text: `${respostaIncorreta2Value}`,
+                image: `${URLincorreta2Value}`,
+                isCorrectAnswer: false
+            }
+            respostas.push(objRespostaIncorreta2)
+        }
+
+        if (respostaIncorreta3Value !== ""){
+            objRespostaIncorreta3 = {
+                text: `${respostaIncorreta3Value}`,
+                image: `${URLincorreta3Value}`,
+                isCorrectAnswer: false
+            }
+            respostas.push(objRespostaIncorreta3)
+        }
+
+        console.log(respostas);
+
+        grupoPergunta = {
+            title:`${txtDaPerguntaValue}`,
+            color: `${corFundoPerguntaValue}`,
+            answers: respostas,
+        };
+
+        console.log(grupoPergunta);
+
+        arrQuestions.push(grupoPergunta);
+
+        respostas = [];
+
+    }
+}
+
 
 function geraNiveis(){
     for (let i = 0; i < numnivqnum; i++){
@@ -286,18 +441,18 @@ function geraNiveis(){
             </div>
             <div class="tampa hidden">
                 <form class="form-input">
-                    <input type="text" id='input-informacao' placeholder="Título do nível" autocomplete="off">
+                    <input type="text" id='input-informacao' class = "n" placeholder="Título do nível" autocomplete="off">
                 </form>
                 <form class="form-input">
-                    <input type="text" id='input-informacao' placeholder="% de acerto mínima"
+                    <input type="text" id='input-informacao' class = "n" placeholder="% de acerto mínima"
                         autocomplete="off">
                 </form>
                 <form class="form-input">
-                    <input type="text" id='input-informacao' placeholder="URL da imagem do nível"
+                    <input type="text" id='input-informacao' class = "n" placeholder="URL da imagem do nível"
                         autocomplete="off">
                 </form>
                 <form class="form-input">
-                    <textarea id='input-informacao-nivel' rows="4" cols="20" placeholder="Descrição do nível"
+                    <textarea id='input-informacao-nivel' rows="4" cols="20" class = "n" placeholder="Descrição do nível"
                         autocomplete="off"></textarea>
                 </form>
             </div>
@@ -306,15 +461,69 @@ function geraNiveis(){
     }
 }
 
+let arrLevels = [];
 
-let tituloDoQuiz;
-function validaTituloQuiz(){
-    tituloDoQuiz = document.querySelector('.criacao-titulo-do-quiz').value;
+let objLevels = {}; 
+
+
+function lendoNiveis(){
+    
+    for(let i = 0; i < numnivqnum; i++){
+        let a = document.querySelector('.n');
+        let av = a.value;
+        
+
+        a.classList.remove('n');
+        let b = document.querySelector('.n');
+        let bv = b.value;
+        
+
+        b.classList.remove('n');
+        let c = document.querySelector('.n');
+        let cv = c.value;
+        
+
+        c.classList.remove('n');
+        let d = document.querySelector('.n');
+        let dv = d.value;
+        
+
+        d.classList.remove('n');
+
+        
+        objLevels = {
+            title: `${av}`,
+            image: `${cv}`,
+            text:  `${dv}`,
+            minValue: `${bv}`
+        };
+
+        arrLevels.push(objLevels);
+
+
+        
+    }
+
 }
 
-let urlImgQuiz;
-function validaURL(){
-    urlImgQuiz = document.querySelector('.url-imagem-quiz').value;
+function geraPostQuiz(){
+    objPost = {
+        title: `${tituloDoQuiz}`,
+        image: `${urlImgQuiz}`,
+        questions: arrQuestions,
+        levels: arrLevels
+    }
+    axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', objPost)
+}
+
+function limpaEspacos(){
+    document.querySelector('.criacao-titulo-do-quiz').value = "";
+    document.querySelector('.url-imagem-quiz').value = "";
+    document.querySelector('.criacao-perguntas-quiz').value = "";
+    document.querySelector('.criacao-niveis-quiz').value = "";
+    document.querySelector('.perguntas-aqui-dentro').innerHTML = "";
+    document.querySelector('.niveis-aqui-dentro').innerHTML = "";
+    document.querySelector('.finalizando').innerHTML = "";
 }
 
 
@@ -339,7 +548,6 @@ function alteraURL(){
     const x = document.querySelector('.caixa-img-final');
     x.style.background = `linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url("${urlImgQuiz}") no-repeat top center`
 }
-
 
 
 function recarregaSite() {
@@ -384,5 +592,3 @@ function reiniciarQuizz () {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera 
 }
-
-
