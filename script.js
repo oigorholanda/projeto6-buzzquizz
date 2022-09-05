@@ -4,6 +4,9 @@ let qtdPergunta;
 let perguntas = [];
 let imagemQuizz;
 let niveis;
+let tituloNivel;
+let textoNivel;
+let imagemNivel;
 
 
 
@@ -198,7 +201,8 @@ function finalizandoQuiz(){
     validaTituloQuiz();
     validaURL();
     geraTelaFinal();
-    alteraURL()
+    alteraURL();
+    geraPostQuiz()
     
 }
 
@@ -246,11 +250,7 @@ function voltaHome(){
 
 
 
-
 let objPost = {};
-
-
-
 
 
 function geraPerguntas(){
@@ -311,117 +311,121 @@ function geraPerguntas(){
 }
 
 let arrQuestions = [];
+let grupoPergunta = {};
 let objRespostaCorreta = {};
-let objRespostaIncorreta1 = {};
-let objRespostaIncorreta2 = {};
-let objRespostaIncorreta3 = {};
+let objRespostaIncorreta1;
+let objRespostaIncorreta2;
+let objRespostaIncorreta3;
 let objResposta = [];
 let respostas = [];
 
 
 function lendoPerguntas(){
     for(let i = 0; i < npqn; i++){
-        let a = document.querySelector('.c');
-        let av = a.value;
+        let txtDaPergunta = document.querySelector('.c');
+        let txtDaPerguntaValue = txtDaPergunta.value;
 
-        a.classList.remove('c');
+        txtDaPergunta.classList.remove('c');
 
-        let b = document.querySelector('.c');
-        let bv = b.value;
+        let corFundoPergunta = document.querySelector('.c');
+        let corFundoPerguntaValue = corFundoPergunta.value;
         
-        b.classList.remove('c');
+        corFundoPergunta.classList.remove('c');
 
         
-        let c = document.querySelector('.c');
-        let cv = c.value;
+        let respostaCorreta = document.querySelector('.c');
+        let respostaCorretaValue = respostaCorreta.value;
 
-        c.classList.remove('c');
+        respostaCorreta.classList.remove('c');
 
-        let d = document.querySelector('.c');
-        let dv = d.value;
+        let URLrespostaCorrreta = document.querySelector('.c');
+        let URLrespostaCorrretaValue = URLrespostaCorrreta.value;
 
-        d.classList.remove('c');
+        URLrespostaCorrreta.classList.remove('c');
 
         objRespostaCorreta = {
-            text: `${cv}`,
-            image: `${dv}`,
+            text: `${respostaCorretaValue}`,
+            image: `${URLrespostaCorrretaValue}`,
             isCorrectAnswer: true
         }
 
-        objResposta.push(objRespostaCorreta)
+        respostas.push(objRespostaCorreta)
 
     
-        let e = document.querySelector('.c');
-        let ev = e.value;
+        let respostaIncorreta1 = document.querySelector('.c');
+        let respostaIncorreta1Value = respostaIncorreta1.value;
 
 
-        e.classList.remove('c');
+        respostaIncorreta1.classList.remove('c');
 
-        let f = document.querySelector('.c');
-        let fv = f.value;
+        let URLincorreta1 = document.querySelector('.c');
+        let URLincorreta1Value = URLincorreta1.value;
 
-        f.classList.remove('c');
+        URLincorreta1.classList.remove('c');
 
-        let g = document.querySelector('.c');
-        let gv = g.value;
+        let respostaIncorreta2 = document.querySelector('.c');
+        let respostaIncorreta2Value= respostaIncorreta2.value;
 
-        g.classList.remove('c');
+        respostaIncorreta2.classList.remove('c');
 
-        let h = document.querySelector('.c');
-        let hv = h.value;
+        let URLincorreta2 = document.querySelector('.c');
+        let URLincorreta2Value = URLincorreta2.value;
 
-        h.classList.remove('c');
+        URLincorreta2.classList.remove('c');
 
-        let i = document.querySelector('.c');
-        let iv = i.value;
+        let respostaIncorreta3 = document.querySelector('.c');
+        let respostaIncorreta3Value = respostaIncorreta3.value;
 
-        i.classList.remove('c');
+        respostaIncorreta3.classList.remove('c');
 
-        let j = document.querySelector('.c');
-        let jv = j.value;
+        let URLincorreta3 = document.querySelector('.c');
+        let URLincorreta3Value = URLincorreta3.value;
 
-        j.classList.remove('c');
+        URLincorreta3.classList.remove('c');
 
-        if (ev !== ""){
+        if (respostaIncorreta1Value !== ""){
             objRespostaIncorreta1 = {
-                text: `${ev}`,
-                image: `${fv}`,
+                text: `${respostaIncorreta1Value}`,
+                image: `${URLincorreta1Value}`,
                 isCorrectAnswer: false
             }
-            objResposta.push(objRespostaIncorreta1)
+            respostas.push(objRespostaIncorreta1)
         }
 
-        if (gv !== ""){
+        if (respostaIncorreta2Value !== ""){
             objRespostaIncorreta2 = {
-                text: `${gv}`,
-                image: `${hv}`,
+                text: `${respostaIncorreta2Value}`,
+                image: `${URLincorreta2Value}`,
                 isCorrectAnswer: false
             }
-            objResposta.push(objRespostaIncorreta2)
+            respostas.push(objRespostaIncorreta2)
         }
 
-        if (iv !== ""){
+        if (respostaIncorreta3Value !== ""){
             objRespostaIncorreta3 = {
-                text: `${iv}`,
-                image: `${jv}`,
+                text: `${respostaIncorreta3Value}`,
+                image: `${URLincorreta3Value}`,
                 isCorrectAnswer: false
             }
-            objResposta.push(objRespostaIncorreta3)
+            respostas.push(objRespostaIncorreta3)
         }
 
-        respostas.push(objResposta)
-        
-        arrQuestions = {
-			title:`${av}`,
-			color: `${bv}`,
-			answers: `${respostas}`,
-        }
+        console.log(respostas);
 
+        grupoPergunta = {
+            title:`${txtDaPerguntaValue}`,
+            color: `${corFundoPerguntaValue}`,
+            answers: respostas,
+        };
+
+        console.log(grupoPergunta);
+
+        arrQuestions.push(grupoPergunta);
+
+        respostas = [];
 
     }
 }
-
-
 
 
 function geraNiveis(){
@@ -501,7 +505,15 @@ function lendoNiveis(){
     
 }
 
-
+function geraPostQuiz(){
+    objPost = {
+        title: `${tituloDoQuiz}`,
+        image: `${urlImgQuiz}`,
+        questions: arrQuestions,
+        levels: arrLevels
+    }
+    axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', objPost)
+}
 
 
 
